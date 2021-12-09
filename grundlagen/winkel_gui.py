@@ -1,13 +1,20 @@
 import tkinter as tk
+from math import *
 import grundlagen.winkel as wk
+import mein_paket.mein_paket_modul as mpm
 import grundlagen.gui as gui
 
 
 class Anwendung(tk.Frame):
 
     def __init__(self, master=None):
+
         super().__init__(master)
         self.grid()
+
+        param = 5
+        ergebnis = mpm.meine_paket_modul_funktion(param)
+        print(ergebnis)
 
         tk.Label(self, text="Winkelumrechnung").grid(row=0, columnspan=3)
 
@@ -27,20 +34,25 @@ class Anwendung(tk.Frame):
         tk.Button(self, text="Umrechnen", command=self.umrechnendeg).grid(row=2, column=2)
         tk.Button(self, text="Umrechnen", command=self.umrechnengon).grid(row=3, column=2)
 
-        tk.Button(self, text="Beenden", command=self.master.destroy, fg="red").grid(row=4, columnspan=3)
+        tk.Button(self, text="Beenden", command=self.master.destroy).grid(row=4, columnspan=3)
 
     def umrechnenrad(self):
         rad = gui.eingabefeld_auswerten(self.eingaberad)
+
+
         gui.eingabefeld_schreiben(self.eingabedeg, wk.Winkel.rad2deg(rad))
         gui.eingabefeld_schreiben(self.eingabegon, wk.Winkel.rad2gon(rad))
 
     def umrechnendeg(self):
         deg = gui.eingabefeld_auswerten(self.eingabedeg)
+
         gui.eingabefeld_schreiben(self.eingaberad, wk.Winkel.deg2rad(deg))
         gui.eingabefeld_schreiben(self.eingabegon, wk.Winkel.deg2gon(deg))
 
     def umrechnengon(self):
         gon = gui.eingabefeld_auswerten(self.eingabegon)
+
+
         gui.eingabefeld_schreiben(self.eingaberad, wk.Winkel.gon2rad(gon))
         gui.eingabefeld_schreiben(self.eingabedeg, wk.Winkel.gon2deg(gon))
 
