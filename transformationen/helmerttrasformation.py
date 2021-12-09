@@ -134,13 +134,8 @@ class Helmerttransformation:
         with open("trafo_parameter.json", "w") as json_datei:
             json.dump(self.__trafo_param, json_datei)
 
-
     def restklaffen(self):
         pass
-
-
-
-
 
     def transformation(self):
         # Transformation
