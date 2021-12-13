@@ -1,6 +1,7 @@
 import tkinter as tk
 import grundlagen.zweite_grundaufgabe as zg
 import grundlagen.punkt as pkt
+import grundlagen.gui as gui
 
 
 class Anwendung(tk.Frame):
@@ -41,8 +42,8 @@ class Anwendung(tk.Frame):
 
     def berechnen(self):
 
-        p1 = pkt.Punkt(float(self.eingabe_y1.get()), float(self.eingabe_x1.get()))
-        p2 = pkt.Punkt(float(self.eingabe_y2.get()), float(self.eingabe_x2.get()))
+        p1 = pkt.Punkt(gui.eingabefeld_auswerten(self.eingabe_y1), gui.eingabefeld_auswerten(self.eingabe_x1))
+        p2 = pkt.Punkt(gui.eingabefeld_auswerten(self.eingabe_y2), gui.eingabefeld_auswerten(self.eingabe_x2))
         #p1 = pkt.Punkt(528.15, 407.65)
         #p2 = pkt.Punkt(795.17, 525.10)
         ergebnis = zg.zweitegrundaufgabe(p1, p2)

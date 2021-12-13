@@ -4,6 +4,11 @@ import tkinter as tk
 class Werkzeugleiste(tk.Frame):
 
     def __init__(self, p_master=None):
+        """
+        Initialisiert die Werkzeugleiste.
+        :param p_master: Master-Anwendung
+        :type p_master: Anwendung
+        """
 
         super().__init__(p_master)
 
@@ -13,18 +18,21 @@ class Werkzeugleiste(tk.Frame):
         self.initialisiere_gui()
 
     def initialisiere_gui(self):
-
+        """
+        Initialisieren der GUI der Werkzeugleiste.
+        """
         self.grid()
 
-        self.__symbol_datei_oeffnen.configure(file="./gui/grafik/symbol/24/file_yellow_open.gif")
-        knopf_datei_oeffnen = tk.Button(self, image=self.__symbol_datei_oeffnen, text="Öffnen",
-                                        command=self.befehl_datei_oeffnen, width=24, height=24).grid(row=0, column=0)
+        self.__symbol_datei_oeffnen.configure(file="./gui/grafik/symbol/24x24/file_yellow_open.gif")
+        tk.Button(self, image=self.__symbol_datei_oeffnen, text="Öffnen", command=self.werkzeug_datei_oeffnen,
+                  width=24, height=24).grid(row=0, column=0)
 
-        self.__symbol_beenden.configure(file="./gui/grafik/symbol/24/exit.gif")
-        knopf_beenden = tk.Button(self, image=self.__symbol_beenden, text="Beenden", command=self.befehl_beenden, width=24, height=24).grid(row=0, column=1)
+        self.__symbol_beenden.configure(file="./gui/grafik/symbol/24x24/exit.gif")
+        tk.Button(self, image=self.__symbol_beenden, text="Beenden", command=self.werkzeug_beenden,
+                  width=24, height=24).grid(row=0, column=1)
 
-    def befehl_datei_oeffnen(self):
-        self.master.werkzeug_test()
+    def werkzeug_datei_oeffnen(self):
+        self.master.menue_datei_oeffnen()
 
-    def befehl_beenden(self):
-        self.master.werkzeug_test()
+    def werkzeug_beenden(self):
+        self.master.menue_beenden()

@@ -1,3 +1,4 @@
+import json
 import tkinter as tk
 import grundlagen.winkel_gui
 import grundlagen.erste_grundaufgabe_gui
@@ -6,22 +7,21 @@ import gui.menue as mn
 import gui.werkzeugleiste as wl
 import gui.statusleiste as sl
 import gui.arbeitsbereich as ab
+import tkinter.filedialog as tkfd
+import tkinter.messagebox as tkmb
 
 
 class Anwendung(tk.Frame):
 
     def __init__(self, master=None):
         """
-
-        :param master:
+        Initialisiert die Anwendung.
+        :param master: Master-Anwendung
+        :type master: Tk
         """
-        super().__init__(master)
-        #
-        # GUI
-        #
-        self.grid()
 
-        # TODO: Werkzeugleiste, Menü, ...
+        super().__init__(master)
+        self.grid()
 
         self.__menue = mn.Menue(self, self.master)
         self.__werkzeugleiste = wl.Werkzeugleiste(self)
@@ -32,20 +32,21 @@ class Anwendung(tk.Frame):
 
     def initialisiere_gui(self):
         """
-
-        :return:
+        Initialisiert die GUI.
+        :return: None
+        :rtype: None
         """
 
         # Menü
         self.master.config(menu=self.__menue)
 
-        # Werkzeugleiste(mit ins grid gepackt)
+        # Werkzeugleiste (in das Grid gepackt)
         self.__werkzeugleiste.grid(row=0, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
 
-        # Arbeitsbereich
+        # Arbeitsbereich (in das Grid gepackt)
         self.__arbeitsbereich.grid(row=1, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
 
-        # Statusleiste
+        # Statusleiste (in das Grid gepackt)
         self.__statusleiste.grid(row=2, column=0, sticky=tk.E+tk.S+tk.W)
 
         self.rowconfigure(1, weight=1)
@@ -53,26 +54,40 @@ class Anwendung(tk.Frame):
 
     @staticmethod
     def fenster_winkel():
-        top = tk.Toplevel()
-        grundlagen.winkel_gui.Anwendung(top)
+        grundlagen.winkel_gui.Anwendung(tk.Toplevel())
 
     @staticmethod
     def fenster_erstega():
-        top = tk.Toplevel()
-        grundlagen.erste_grundaufgabe_gui.Anwendung(top)
+        grundlagen.erste_grundaufgabe_gui.Anwendung(tk.Toplevel())
 
     @staticmethod
     def fenster_zweitega():
-        top = tk.Toplevel()
-        grundlagen.zweite_grundaufgabe_gui.Anwendung(top)
+        grundlagen.zweite_grundaufgabe_gui.Anwendung(tk.Toplevel())
 
     @staticmethod
-    def menue_test():
-        print("Menü Test")
+    def menue_tut_nix():
+        tkmb.showinfo("TODO", "Hier passiert noch nix!")
 
-    @staticmethod
-    def werkzeug_test():
-        print("Werkzeug Test")
+    def menue_datei_oeffnen(self):
+
+        dateitypen = (
+            ('JSON-Dateien', '*.json'),
+            ('Alle Dateien', '*.*')
+        )
+
+        dateiname = tkfd.askopenfilename(
+            title="Datei öffnen",
+            initialdir="/",
+            filetypes=dateitypen
+            )
+
+        # JSON aus Datei
+        with open(dateiname) as json_datei:
+            json_daten = json.load(json_datei)
+            self.__arbeitsbereich.setze_text(json.dumps(json_daten, sort_keys=True, indent=4))
+
+    def menue_beenden(self):
+        self.master.destroy()
 
 
 if __name__ == "__main__":
