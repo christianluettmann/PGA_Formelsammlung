@@ -1,4 +1,5 @@
 import tkinter as tk
+import grundlagen.punkt as pkt
 
 
 class Arbeitsbereich(tk.Frame):
@@ -20,9 +21,9 @@ class Arbeitsbereich(tk.Frame):
         """
         Initialisiert die GUI des Arbeitsbereiches.
         """
-        tk.Button(self, text="Winkel", command=self.master.fenster_winkel).grid(row=1)
-        tk.Button(self, text="1. geod. GA", command=self.master.fenster_erstega).grid(row=2)
-        tk.Button(self, text="2. geod. GA", command=self.master.fenster_zweitega).grid(row=3)
+        # tk.Button(self, text="Winkel", command=self.master.fenster_winkel).grid(row=1)
+        # tk.Button(self, text="1. geod. GA", command=self.master.fenster_erstega).grid(row=2)
+        # tk.Button(self, text="2. geod. GA", command=self.master.fenster_zweitega).grid(row=3)
 
         self.__textfeld.grid(row=4)
 
@@ -33,3 +34,18 @@ class Arbeitsbereich(tk.Frame):
         :type p_text: str
         """
         self.__textfeld.insert(tk.END, p_text)
+
+    def hole_punkt(self) -> pkt.Punkt:
+        """
+
+        :return: Punkt
+        :rtype: pkt.Punkt
+        """
+
+        p: pkt.Punkt = pkt.Punkt(1234.56, 78.9, "Arbeitsbereich", 4326)
+
+        return p
+
+    def sende_punkt(self, p_p: pkt.Punkt):
+
+        self.setze_text(str(p_p))

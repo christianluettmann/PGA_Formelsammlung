@@ -9,38 +9,39 @@ import gui.statusleiste as sl
 import gui.arbeitsbereich as ab
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
-
 import schnitte_neu.bogenschnitt_gui
+import grundlagen.punkt as pkt
+import gui.berechnungsfenster
+import grundlagen.punktliste as pktlst
 
 
-class Anwendung(tk.Frame):
+class Anwendung(tk.Tk):
 
-    def __init__(self, master=None):
+    def __init__(self):
         """
         Initialisiert die Anwendung.
-        :param master: Master-Anwendung
-        :type master: Tk
         """
-
-        super().__init__(master)
+        super().__init__()
         self.grid()
 
-        self.__menue = mn.Menue(self, self.master)
+        # GUI
+        self.__menue = mn.Menue(self)
         self.__werkzeugleiste = wl.Werkzeugleiste(self)
         self.__statusleiste = sl.Statusleiste(self)
         self.__arbeitsbereich = ab.Arbeitsbereich(self)
+
+        # DATEN
+        self.__pktlst: dict = {}
 
         self.initialisiere_gui()
 
     def initialisiere_gui(self):
         """
         Initialisiert die GUI.
-        :return: None
-        :rtype: None
         """
 
         # Menü
-        self.master.config(menu=self.__menue)
+        self.config(menu=self.__menue)
 
         # Werkzeugleiste (in das Grid gepackt)
         self.__werkzeugleiste.grid(row=0, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
@@ -56,25 +57,29 @@ class Anwendung(tk.Frame):
 
     @staticmethod
     def fenster_winkel():
-        grundlagen.winkel_gui.Anwendung(tk.Toplevel())
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        grundlagen.winkel_gui.Anwendung(top)
 
     @staticmethod
     def fenster_erstega():
-        grundlagen.erste_grundaufgabe_gui.Anwendung(tk.Toplevel())
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        grundlagen.erste_grundaufgabe_gui.Anwendung(top)
 
     @staticmethod
     def fenster_zweitega():
-        grundlagen.zweite_grundaufgabe_gui.Anwendung(tk.Toplevel())
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        grundlagen.zweite_grundaufgabe_gui.Anwendung(top)
 
     @staticmethod
     def fenster_bogenschnitt():
-        schnitte_neu.bogenschnitt_gui.Anwendung(tk.Toplevel())
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        schnitte_neu.bogenschnitt_gui.Anwendung(top)
 
     @staticmethod
     def menue_tut_nix():
         tkmb.showinfo("TODO", "Hier passiert noch nix!")
 
-    def menue_datei_oeffnen(self):
+    def menue_datei_oeffnen(self):  #TODO: Was passiert, wenn die JSON-Datei keine Punktliste ist?
 
         dateitypen = (
             ('JSON-Dateien', '*.json'),
@@ -90,19 +95,25 @@ class Anwendung(tk.Frame):
         # JSON aus Datei
         with open(dateiname) as json_datei:
             json_daten = json.load(json_datei)
-            self.__arbeitsbereich.setze_text(json.dumps(json_daten, sort_keys=True, indent=4))
+
+            self.__pktlst = pktlst.json2punktliste(json_daten).copy()
+
+            # self.__arbeitsbereich.setze_text(json.dumps(json_daten, sort_keys=True, indent=4))
+
+            for schluessel, wert in self.__pktlst.items():
+                self.__arbeitsbereich.setze_text((str(wert)+"\n"))
 
     def menue_beenden(self):
-        self.master.destroy()
+        self.destroy()
+
+    def lade_punkt(self) -> pkt.Punkt:
+        return self.__arbeitsbereich.hole_punkt()
+
+    def sende_punkt(self, p_p: pkt.Punkt):
+        self.__arbeitsbereich.sende_punkt(p_p)
 
 
 if __name__ == "__main__":
-    wurzel = tk.Tk()
-    anwendung = Anwendung(wurzel)
 
-    wurzel.columnconfigure(0, weight=1)
-    wurzel.rowconfigure(0, weight=1)
-
-    anwendung.grid(row=0, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
-
+    anwendung = Anwendung()
     anwendung.mainloop()
