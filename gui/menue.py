@@ -59,7 +59,7 @@ class Menue(tk.Menu):
         self.__menue_berechnungen.add_command(label="1. geo. Grundaufgabe", command=self.__anwendung.fenster_erstega)
         self.__menue_berechnungen.add_command(label="2. geo. Grundaufgabe", command=self.__anwendung.fenster_zweitega)
         self.__menue_berechnungen.add_separator()
-        self.__menue_berechnungen.add_command(label="Bogenschnitt", command=self.__anwendung.menue_tut_nix)     # todo
+        self.__menue_berechnungen.add_command(label="Bogenschnitt", command=self.__anwendung.fenster_bogenschnitt)
 
         self.add_cascade(label="Berechnungen", menu=self.__menue_berechnungen)
 

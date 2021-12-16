@@ -10,6 +10,8 @@ import gui.arbeitsbereich as ab
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
 
+import schnitte_neu.bogenschnitt_gui
+
 
 class Anwendung(tk.Frame):
 
@@ -63,6 +65,10 @@ class Anwendung(tk.Frame):
     @staticmethod
     def fenster_zweitega():
         grundlagen.zweite_grundaufgabe_gui.Anwendung(tk.Toplevel())
+
+    @staticmethod
+    def fenster_bogenschnitt():
+        schnitte_neu.bogenschnitt_gui.Anwendung(tk.Toplevel())
 
     @staticmethod
     def menue_tut_nix():
