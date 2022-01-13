@@ -1,5 +1,6 @@
 import tkinter as tk
 import grundlagen.gui as gui
+import grundlagen.punkt as pkt
 
 
 class Tabelle(tk.Frame):
@@ -17,7 +18,10 @@ class Tabelle(tk.Frame):
 
         self.__zeilen_anzahl: int = 0
         self.__spalten_anzahl: int = 0
+        # Punktliste
         self.__pktlst: dict = dict()
+        # alle Eingabefelder zur Punktliste (als Instanzvariablen für den klassenweiten Zugriff aus allen Methoden)
+        self.__eingabe_pktlst: dict = dict()
 
         self.initialisiere_gui()
 
@@ -44,29 +48,50 @@ class Tabelle(tk.Frame):
 
         for schluessel, wert in self.__pktlst.items():
 
-            eingabe_nr: tk.Entry = tk.Entry(self)
-            eingabe_nr.grid(row=zeile, column=0)
-            gui.eingabefeld_schreiben(eingabe_nr, wert.hole_nr())
+            # TODO: kann noch optimiert werden
+            # Eintrag im Dict zur Aufnahme einer Tabellenzeile von Eingabefeldern
+            # self.__eingabe_pktlst[schluessel]: list = list()
+            self.__eingabe_pktlst[schluessel]: dict = dict()
 
-            eingabe_y: tk.Entry = tk.Entry(self)
-            eingabe_y.grid(row=zeile, column=1)
-            gui.eingabefeld_schreiben(eingabe_y, wert.hole_y())
+            spalte: int = 0
 
-            eingabe_x: tk.Entry = tk.Entry(self)
-            eingabe_x.grid(row=zeile, column=2)
-            gui.eingabefeld_schreiben(eingabe_x, wert.hole_x())
+            self.erzeuge_eingabefeld(zeile, spalte, schluessel, "nr", wert.hole_nr())
+            spalte += 1
 
-            eingabe_epsg: tk.Entry = tk.Entry(self)
-            eingabe_epsg.grid(row=zeile, column=3)
-            gui.eingabefeld_schreiben(eingabe_epsg, wert.hole_epsg())
+            self.erzeuge_eingabefeld(zeile, spalte, schluessel, "y", wert.hole_y())
+            spalte += 1
+
+            self.erzeuge_eingabefeld(zeile, spalte, schluessel, "x", wert.hole_x())
+            spalte += 1
+
+            self.erzeuge_eingabefeld(zeile, spalte, schluessel, "epsg", wert.hole_epsg())
+            spalte += 1
 
             zeile += 1
 
+    def erzeuge_eingabefeld(self, p_zeile, p_spalte, p_schluessel, p_attributname, p_attributwert):
+
+        eingabe: tk.Entry = tk.Entry(self)
+        self.__eingabe_pktlst[p_schluessel][p_attributname] = eingabe
+        self.__eingabe_pktlst[p_schluessel][p_attributname].grid(row=p_zeile, column=p_spalte)
+        gui.eingabefeld_schreiben(self.__eingabe_pktlst[p_schluessel][p_attributname], p_attributwert)
+
+
     def aenderungen(self):
 
-        for schluessel, wert in self.__pktlst.items():
+        # Inhalt der Punktliste komplett löschen
+        self.__pktlst.clear()
+        # TODO: Soll wirklich die gesamte Tabelle wieder durchlaufen werden?
+        for schluessel, wert in self.__eingabe_pktlst.items():
 
-            # Nur zu Demozwecken, später aus Eingabefeldern der Tabelle übernehmen
-            self.__pktlst[schluessel].setze_y(99)
+            nr: str = self.__eingabe_pktlst[schluessel]["nr"].get()
+            y: float = gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["y"])
+            x: float = gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["x"])
+            epsg: int = gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["epsg"])
+
+            p: pkt.Punkt = pkt.Punkt(y, x, nr, epsg)
+
+            self.__pktlst[nr] = p
 
         print("Stop")
+        print(self.__pktlst)
