@@ -1,6 +1,6 @@
 import tkinter as tk
 import grundlagen.punkt as pkt
-
+import gui.tabelle
 
 class Arbeitsbereich(tk.Frame):
 
@@ -14,6 +14,7 @@ class Arbeitsbereich(tk.Frame):
         super().__init__(p_master)
 
         self.__textfeld = tk.Text(self, height=200, width=100)
+        self.__tabelle: gui.tabelle.Tabelle = gui.tabelle.Tabelle(self)
 
         self.initialisiere_gui()
 
@@ -21,11 +22,15 @@ class Arbeitsbereich(tk.Frame):
         """
         Initialisiert die GUI des Arbeitsbereiches.
         """
+        zeile = 0
+
         # tk.Button(self, text="Winkel", command=self.master.fenster_winkel).grid(row=1)
         # tk.Button(self, text="1. geod. GA", command=self.master.fenster_erstega).grid(row=2)
         # tk.Button(self, text="2. geod. GA", command=self.master.fenster_zweitega).grid(row=3)
 
-        self.__textfeld.grid(row=4)
+        # self.__textfeld.grid(row=4)
+        self.__tabelle.grid(row=zeile, column=0)
+        zeile += 1
 
     def setze_text(self, p_text: str):
         """
@@ -33,7 +38,18 @@ class Arbeitsbereich(tk.Frame):
         :param p_text: Text
         :type p_text: str
         """
-        self.__textfeld.insert(tk.END, p_text)
+        # self.__textfeld.insert(tk.END, p_text)
+        pass
+
+    def setze_tabelle(self, p_pktlst: dict):
+        """
+
+        :param p_pktlst:
+        :type p_pktlst:
+        :return:
+        :rtype:
+        """
+        self.__tabelle.setze_punktliste(p_pktlst)
 
     def hole_punkt(self) -> pkt.Punkt:
         """

@@ -100,8 +100,13 @@ class Anwendung(tk.Tk):
 
             # self.__arbeitsbereich.setze_text(json.dumps(json_daten, sort_keys=True, indent=4))
 
-            for schluessel, wert in self.__pktlst.items():
-                self.__arbeitsbereich.setze_text((str(wert)+"\n"))
+            # for schluessel, wert in self.__pktlst.items():
+            #     self.__arbeitsbereich.setze_text((str(wert)+"\n"))
+
+            self.__arbeitsbereich.setze_tabelle(self.__pktlst)
+
+    def menue_exportieren(self):
+        pass
 
     def menue_beenden(self):
         self.destroy()

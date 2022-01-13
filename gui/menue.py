@@ -54,6 +54,7 @@ class Menue(tk.Menu):
         self.__menue_datei.add_command(label="öffnen...", command=self.master.menue_datei_oeffnen)
         self.__menue_datei.add_separator()
         self.__menue_datei.add_command(label="Importieren...", command=self.master.menue_tut_nix)
+        self.__menue_datei.add_command(label="Exportieren...", command=self.master.menue_tut_nix)
         self.__menue_datei.add_separator()
         self.__menue_datei.add_command(label="Beenden", command=self.master.menue_beenden)
 
