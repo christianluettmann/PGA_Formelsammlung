@@ -32,15 +32,6 @@ class Arbeitsbereich(tk.Frame):
         self.__tabelle.grid(row=zeile, column=0)
         zeile += 1
 
-    def setze_text(self, p_text: str):
-        """
-        Setzt einen Text in ein Textfeld.
-        :param p_text: Text
-        :type p_text: str
-        """
-        # self.__textfeld.insert(tk.END, p_text)
-        pass
-
     def setze_tabelle(self, p_pktlst: dict):
         """
 
@@ -51,17 +42,25 @@ class Arbeitsbereich(tk.Frame):
         """
         self.__tabelle.setze_punktliste(p_pktlst)
 
-    def hole_punkt(self) -> pkt.Punkt:
-        """
+    def hole_punkt(self, p_pktnr) -> pkt.Punkt:
+        """Gibt die Anfrage von der Main-Anwendung an die Tabelle weiter.
+        (Punkt aus Tabelle zur Berechnung)
 
+        :param p_pktnr: Punktnummer
+        :type p_pktnr: str
         :return: Punkt
         :rtype: pkt.Punkt
         """
-
-        p: pkt.Punkt = pkt.Punkt(1234.56, 78.9, "Arbeitsbereich", 4326)
-
+        p: pkt.Punkt = self.__tabelle.hole_punkt(p_pktnr)
         return p
 
     def sende_punkt(self, p_p: pkt.Punkt):
+        """Gibt die Anfrage von der Main-Anwendung an die Tabelle weiter.
+        (Punkt aus Berechnung in der Tabelle speichern)
 
-        self.setze_text(str(p_p))
+        :param p_p: Punkt
+        :type p_p: pkt.Punkt
+        :return: None
+        :rtype: None
+        """
+        self.__tabelle.speicher_punkt(p_p)

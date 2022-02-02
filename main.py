@@ -22,6 +22,7 @@ class Anwendung(tk.Tk):
         Initialisiert die Anwendung.
         """
         super().__init__()
+        self.minsize(600, 400)
         self.grid()
 
         # GUI
@@ -111,10 +112,26 @@ class Anwendung(tk.Tk):
     def menue_beenden(self):
         self.destroy()
 
-    def lade_punkt(self) -> pkt.Punkt:
-        return self.__arbeitsbereich.hole_punkt()
+    def lade_punkt(self, p_pktnr) -> pkt.Punkt:
+        """Gibt die Anfrage vom Berechnungsfenster an den Arbeitsbereich weiter.
+        (Punkt aus Tabelle zur Berechnung)
+
+        :param p_pktnr: Punktnummer
+        :type p_pktnr: str
+        :return: Punkt
+        :rtype: pkt.Punkt
+        """
+        return self.__arbeitsbereich.hole_punkt(p_pktnr)
 
     def sende_punkt(self, p_p: pkt.Punkt):
+        """Gibt die Anfrage vom Berechnungsfenster an den Arbeitsbereich weiter.
+        (Punkt aus Berechnung in der Tabelle speichern)
+
+        :param p_p: Punkt
+        :type p_p: pkt.Punkt
+        :return: None
+        :rtype: None
+        """
         self.__arbeitsbereich.sende_punkt(p_p)
 
 

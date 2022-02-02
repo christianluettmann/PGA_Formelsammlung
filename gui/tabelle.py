@@ -1,6 +1,7 @@
 import tkinter as tk
 import grundlagen.gui as gui
 import grundlagen.punkt as pkt
+import tkinter.messagebox as tkmb
 
 
 class Tabelle(tk.Frame):
@@ -95,3 +96,31 @@ class Tabelle(tk.Frame):
 
         print("Stop")
         print(self.__pktlst)
+
+    def hole_punkt(self, p_pktnr):
+        """Gibt den Punkt aus der Tabelle zur übergebenen Punktnummer zurück.
+        (Punkt aus Tabelle zur Berechnung)
+
+        :param p_pktnr: Punktnummer
+        :type p_pktnr: str
+        :return: Punkt
+        :rtype: pkt.Punkt
+        """
+        try:
+            p: pkt.Punkt = self.__pktlst[p_pktnr]
+            return self.__pktlst[p_pktnr]
+        except KeyError:
+            tkmb.showinfo("FEHLER", "Die eingegebene Nummer ist nicht vorhanden!")
+
+    def speicher_punkt(self, p_p: pkt.Punkt):
+        """Speichert den übergebenen Punkt in der Tabelle.
+        (Punkt aus Berechnung in der Tabelle speichern)
+
+        :param p_p: Punkt
+        :type p_p: pkt.Punkt
+        :return: None
+        :rtype: None
+        """
+        self.__pktlst[p_p.hole_nr()] = p_p
+        self.setze_punktliste(self.__pktlst)
+
