@@ -1,12 +1,16 @@
 import tkinter as tk
 import grundlagen.winkel as wk
-import mein_paket.mein_paket_modul as mpm
 import grundlagen.gui as gui
 
 
 class Anwendung(tk.Frame):
 
     def __init__(self, master=None):
+        """Initialisiert die Anwendung
+
+        :param master: Anwendung
+        :type master: Anwendung
+        """
 
         super().__init__(master)
         self.grid()
@@ -17,9 +21,9 @@ class Anwendung(tk.Frame):
         tk.Label(self, text="Deg:").grid(row=2)
         tk.Label(self, text="Gon:").grid(row=3)
 
-        self.eingaberad = tk.Entry(self)
-        self.eingabedeg = tk.Entry(self)
-        self.eingabegon = tk.Entry(self)
+        self.eingaberad: tk.Entry = tk.Entry(self)
+        self.eingabedeg: tk.Entry = tk.Entry(self)
+        self.eingabegon: tk.Entry = tk.Entry(self)
 
         self.eingaberad.grid(row=1, column=1)
         self.eingabedeg.grid(row=2, column=1)
@@ -32,19 +36,19 @@ class Anwendung(tk.Frame):
         tk.Button(self, text="Beenden", command=self.master.destroy).grid(row=4, columnspan=3)
 
     def umrechnenrad(self):
-        rad = gui.eingabefeld_auswerten(self.eingaberad)
+        rad: float = gui.eingabefeld_auswerten(self.eingaberad)
 
         gui.eingabefeld_schreiben(self.eingabedeg, wk.Winkel.rad2deg(rad))
         gui.eingabefeld_schreiben(self.eingabegon, wk.Winkel.rad2gon(rad))
 
     def umrechnendeg(self):
-        deg = gui.eingabefeld_auswerten(self.eingabedeg)
+        deg: float = gui.eingabefeld_auswerten(self.eingabedeg)
 
         gui.eingabefeld_schreiben(self.eingaberad, wk.Winkel.deg2rad(deg))
         gui.eingabefeld_schreiben(self.eingabegon, wk.Winkel.deg2gon(deg))
 
     def umrechnengon(self):
-        gon = gui.eingabefeld_auswerten(self.eingabegon)
+        gon: float = gui.eingabefeld_auswerten(self.eingabegon)
 
         gui.eingabefeld_schreiben(self.eingaberad, wk.Winkel.gon2rad(gon))
         gui.eingabefeld_schreiben(self.eingabedeg, wk.Winkel.gon2deg(gon))

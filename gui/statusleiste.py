@@ -3,15 +3,15 @@ import tkinter as tk
 
 class Statusleiste(tk.Frame):
     def __init__(self, p_master=None):
+        """Initialisiert die Statusleiste.
 
+        :param p_master: Anwendung
+        :type p_master: Anwendung
+        """
         super().__init__(p_master)
 
         self.__inhalt = tk.StringVar()
         self.__beschriftung = tk.Label(self)
-
-        self.initialisiere_gui()
-
-    def initialisiere_gui(self):
 
         self.grid()
 

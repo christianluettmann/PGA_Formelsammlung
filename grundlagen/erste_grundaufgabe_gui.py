@@ -114,7 +114,7 @@ class Anwendung(tk.Frame):
         s12: float = gui.eingabefeld_auswerten(self.__eingabe_s12)
         t12: float = gui.eingabefeld_auswerten(self.__eingabe_t12)
 
-        ergebnis: pkt.Punkt = grundlagen.erste_grundaufgabe.erstegrundaufgabe(p1, s12, t12)
+        ergebnis: pkt.Punkt = grundlagen.erste_grundaufgabe.erste_grundaufgabe(p1, s12, t12)
 
         gui.eingabefeld_schreiben(self.__ausgabe_p2_y, ergebnis.hole_y())
         gui.eingabefeld_schreiben(self.__ausgabe_p2_x, ergebnis.hole_x())
@@ -138,7 +138,7 @@ class Anwendung(tk.Frame):
 
         self.berechnen()
 
-    def lade_punkt(self, p_pktnr):
+    def lade_punkt(self, p_pktnr: str):
         """Lädt einen Punkt aus der Main-Punktliste und fügt ihn in die Eingabefelder ein.
         (erste_grundaufgabe_gui -> berechnungsfenster -> main -> arbeitsbereich -> tabelle)
 

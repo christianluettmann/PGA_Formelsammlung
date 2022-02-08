@@ -10,10 +10,10 @@ class Tabelle(tk.Frame):
     """
 
     def __init__(self, p_master):
-        """
+        """Initialisiert die Klasse Tabelle.
 
-        :param p_master:
-        :type p_master:
+        :param p_master: Anwendung
+        :type p_master: Anwendung
         """
         super().__init__(p_master)
 
@@ -24,14 +24,16 @@ class Tabelle(tk.Frame):
         # alle Eingabefelder zur Punktliste (als Instanzvariablen für den klassenweiten Zugriff aus allen Methoden)
         self.__eingabe_pktlst: dict = dict()
 
-        self.initialisiere_gui()
-
-    def initialisiere_gui(self):
-
         self.grid()
 
     def setze_punktliste(self, p_pktlst: dict):
+        """Erstellt die Tabelle mit den Punkten.
 
+        :param p_pktlst: Punktliste
+        :type p_pktlst: dict
+        :return: None
+        :rtype: None
+        """
         self.__pktlst = p_pktlst    # beide dict belegen einen identischen Speicherplatz
         self.__zeilen_anzahl = len(p_pktlst)
         self.__spalten_anzahl = 4   # nr, y, x, epsg
@@ -53,32 +55,45 @@ class Tabelle(tk.Frame):
             # Eintrag im Dict zur Aufnahme einer Tabellenzeile von Eingabefeldern
             # self.__eingabe_pktlst[schluessel]: list = list()
             self.__eingabe_pktlst[schluessel]: dict = dict()
-
             spalte: int = 0
-
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "nr", wert.hole_nr())
             spalte += 1
-
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "y", wert.hole_y())
             spalte += 1
-
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "x", wert.hole_x())
             spalte += 1
-
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "epsg", wert.hole_epsg())
             spalte += 1
-
             zeile += 1
 
-    def erzeuge_eingabefeld(self, p_zeile, p_spalte, p_schluessel, p_attributname, p_attributwert):
+    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int, p_schluessel: str, p_atributname: str, p_atributwert: str):
+        """Erzeugt ein Eingabefeld an der angegebenen Stellt mit den Werten.
 
+        :param p_zeile: Zeilennummer
+        :type p_zeile: int
+        :param p_spalte: Spaltennummer
+        :type p_spalte: int
+        :param p_schluessel: Schlüssel in der Punktliste
+        :type p_schluessel: str
+        :param p_atributname: Atributname
+        :type p_atributname: str
+        :param p_atributwert: Atributwert
+        :type p_atributwert: str
+        :return: None
+        :rtype: None
+        """
         eingabe: tk.Entry = tk.Entry(self)
-        self.__eingabe_pktlst[p_schluessel][p_attributname] = eingabe
-        self.__eingabe_pktlst[p_schluessel][p_attributname].grid(row=p_zeile, column=p_spalte)
-        gui.eingabefeld_schreiben(self.__eingabe_pktlst[p_schluessel][p_attributname], p_attributwert)
+        self.__eingabe_pktlst[p_schluessel][p_atributname] = eingabe
+        self.__eingabe_pktlst[p_schluessel][p_atributname].grid(row=p_zeile, column=p_spalte)
+        gui.eingabefeld_schreiben(self.__eingabe_pktlst[p_schluessel][p_atributname], p_atributwert)
 
 
     def aenderungen(self):
+        """
+
+        :return:
+        :rtype:
+        """
 
         # Inhalt der Punktliste komplett löschen
         self.__pktlst.clear()
@@ -124,4 +139,3 @@ class Tabelle(tk.Frame):
         """
         self.__pktlst[p_p.hole_nr()] = p_p
         self.setze_punktliste(self.__pktlst)
-

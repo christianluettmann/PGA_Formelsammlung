@@ -4,6 +4,7 @@ import grundlagen.winkel_gui
 import grundlagen.erste_grundaufgabe_gui
 import grundlagen.zweite_grundaufgabe_gui
 import schnitte.rueckwaertsschnitt_gui
+import schnitte.vorwaertsschnitt_gui
 import gui.menue as mn
 import gui.werkzeugleiste as wl
 import gui.statusleiste as sl
@@ -81,6 +82,11 @@ class Anwendung(tk.Tk):
     def fenster_rueckwaertsschnitt():
         top = gui.berechnungsfenster.Berechnungsfenster()
         schnitte.rueckwaertsschnitt_gui.Anwendung(top)
+
+    @staticmethod
+    def fenster_vorwaertsschnitt():
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        schnitte.vorwaertsschnitt_gui.Anwendung(top)
 
     @staticmethod
     def menue_tut_nix():

@@ -4,12 +4,11 @@ import tkinter as tk
 class Werkzeugleiste(tk.Frame):
 
     def __init__(self, p_master=None):
-        """
-        Initialisiert die Werkzeugleiste.
+        """Initialisiert die Werkzeugleiste.
+
         :param p_master: Master-Anwendung
         :type p_master: Anwendung
         """
-
         super().__init__(p_master)
 
         self.__symbol_datei_oeffnen = tk.PhotoImage()
@@ -18,8 +17,10 @@ class Werkzeugleiste(tk.Frame):
         self.initialisiere_gui()
 
     def initialisiere_gui(self):
-        """
-        Initialisieren der GUI der Werkzeugleiste.
+        """Initialisieren der GUI der Werkzeugleiste.
+
+        :return: None
+        :rtype: None
         """
         self.grid()
 
@@ -32,7 +33,17 @@ class Werkzeugleiste(tk.Frame):
                   width=24, height=24).grid(row=0, column=1)
 
     def werkzeug_datei_oeffnen(self):
+        """Ruft das "Datei öffnen"-Menü auf.
+
+        :return: None
+        :rtype: None
+        """
         self.master.menue_datei_oeffnen()
 
     def werkzeug_beenden(self):
+        """Ruft das "Beenden-Menü" auf.
+
+        :return: None
+        :rtype: None
+        """
         self.master.menue_beenden()

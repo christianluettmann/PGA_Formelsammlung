@@ -156,11 +156,10 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
+        p1: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p1_y), gui.eingabefeld_auswerten(self.__eingabe_p1_x))
+        p2: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p2_y), gui.eingabefeld_auswerten(self.__eingabe_p2_x))
 
-        p1 = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p1_y), gui.eingabefeld_auswerten(self.__eingabe_p1_x))
-        p2 = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p2_y), gui.eingabefeld_auswerten(self.__eingabe_p2_x))
-
-        ergebnis = grundlagen.zweite_grundaufgabe.zweitegrundaufgabe(p1, p2)
+        ergebnis: tuple = grundlagen.zweite_grundaufgabe.zweitegrundaufgabe(p1, p2)
 
         gui.eingabefeld_schreiben(self.__ausgabe_s12, ergebnis[0])
         gui.eingabefeld_schreiben(self.__ausgabe_t12, ergebnis[1])

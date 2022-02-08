@@ -29,6 +29,3 @@ class Berechnungsfenster(tk.Toplevel):
         :rtype: None
         """
         self.master.sende_punkt(p_p)
-
-    def erzeuge_gui_punkt(self):
-        pass
