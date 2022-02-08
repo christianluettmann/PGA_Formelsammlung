@@ -3,13 +3,14 @@ import tkinter as tk
 import grundlagen.winkel_gui
 import grundlagen.erste_grundaufgabe_gui
 import grundlagen.zweite_grundaufgabe_gui
+import schnitte.rueckwaertsschnitt_gui
 import gui.menue as mn
 import gui.werkzeugleiste as wl
 import gui.statusleiste as sl
 import gui.arbeitsbereich as ab
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
-import schnitte_neu.bogenschnitt_gui
+import schnitte.bogenschnitt_gui
 import grundlagen.punkt as pkt
 import gui.berechnungsfenster
 import grundlagen.punktliste as pktlst
@@ -74,7 +75,12 @@ class Anwendung(tk.Tk):
     @staticmethod
     def fenster_bogenschnitt():
         top = gui.berechnungsfenster.Berechnungsfenster()
-        schnitte_neu.bogenschnitt_gui.Anwendung(top)
+        schnitte.bogenschnitt_gui.Anwendung(top)
+
+    @staticmethod
+    def fenster_rueckwaertsschnitt():
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        schnitte.rueckwaertsschnitt_gui.Anwendung(top)
 
     @staticmethod
     def menue_tut_nix():

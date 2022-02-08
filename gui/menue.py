@@ -85,7 +85,7 @@ class Menue(tk.Menu):
         Initialisiert das Schnitte-Untermenü.
         """
         self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt", command=self.master.menue_tut_nix)
-        self.__menue_berechnungen_schnitte.add_command(label="Rückwärtsschnitt", command=self.master.menue_tut_nix)
+        self.__menue_berechnungen_schnitte.add_command(label="Rückwärtsschnitt", command=self.master.fenster_rueckwaertsschnitt)
         self.__menue_berechnungen_schnitte.add_command(label="Bogenschnitt", command=self.master.fenster_bogenschnitt)
 
     def menue_berechnungen_polygonzug(self):

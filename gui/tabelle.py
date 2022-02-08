@@ -110,7 +110,8 @@ class Tabelle(tk.Frame):
             p: pkt.Punkt = self.__pktlst[p_pktnr]
             return self.__pktlst[p_pktnr]
         except KeyError:
-            tkmb.showinfo("FEHLER", "Die eingegebene Nummer ist nicht vorhanden!")
+            # tkmb.showinfo("FEHLER", "Die eingegebene Nummer ist nicht vorhanden!")
+            return pkt.Punkt()
 
     def speicher_punkt(self, p_p: pkt.Punkt):
         """Speichert den übergebenen Punkt in der Tabelle.
