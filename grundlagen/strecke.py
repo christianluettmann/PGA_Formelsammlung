@@ -5,9 +5,7 @@ import sys
 
 
 class Strecke:
-    """Klasse Strecke
 
-    """
     def __init__(self, p_pa: pkt.Punkt, p_pe: pkt.Punkt, p_nr: str = ""):
         """Primärer Konstruktor
         :param p_pa: Anfangspunkt
@@ -77,7 +75,7 @@ class Strecke:
         pe: pkt.Punkt = pkt.Punkt(0.0, 0.0)
         return cls(pa, pe, p_nr)
 
-    def hole_epsg(self):
+    def hole_epsg(self) -> int:
         """Getter für EPSG-Code.
 
         :return: EPSG-Code
@@ -85,7 +83,7 @@ class Strecke:
         """
         return self.__pa.hole_epsg()
 
-    def hole_pa(self):
+    def hole_pa(self) -> pkt.Punkt:
         """Getter für Anfangspunkt.
 
         :return: Anfangspunkt
@@ -93,7 +91,7 @@ class Strecke:
         """
         return self.__pa
 
-    def hole_pe(self):
+    def hole_pe(self) -> pkt.Punkt:
         """Getter für Endpunkt.
 
         :return: Endpunkt
@@ -101,7 +99,7 @@ class Strecke:
         """
         return self.__pe
 
-    def setze_pa(self, p_pa: pkt.Punkt):
+    def setze_pa(self, p_pa: pkt.Punkt) -> None:
         """Setter für Anfangspunkt.
 
         :param p_pa: Anfangspunkt
@@ -115,7 +113,7 @@ class Strecke:
 
         self.__pa: pkt.Punkt = copy.deepcopy(p_pa)
 
-    def setze_pe(self, p_pe: pkt.Punkt):
+    def setze_pe(self, p_pe: pkt.Punkt) -> None:
         """Setter für Endpunkt.
 
         :param p_pe: Endpunkt
@@ -129,7 +127,7 @@ class Strecke:
 
         self.__pe: pkt.Punkt = copy.deepcopy(p_pe)
 
-    def laenge(self):
+    def laenge(self) -> float:
         """Gibt die Länge der Strecke zurück.
 
         :return: Länge der Strecke
@@ -167,7 +165,7 @@ class Strecke:
                 json_daten[schluessel] = wert
         return json_daten
 
-    def setze_json(self, p_json: dict):
+    def setze_json(self, p_json: dict) -> None:
         """Setzt die Attribute einer Strecke mit den Werten des Dictionaries.
 
         :param p_json: JSON/Dictionary
@@ -186,34 +184,3 @@ class Strecke:
                     setattr(self, schluessel, p)
             else:
                 setattr(self, schluessel, wert)
-
-
-if __name__ == "__main__":
-
-    pa: pkt.Punkt = pkt.Punkt()
-    pe: pkt.Punkt = pkt.Punkt(10.0, 10.0)
-
-    s: Strecke = Strecke(pa, pe)
-    l1 = s.laenge()
-    print(l1)
-
-    pa.setze_y(1000.0)
-
-    l2 = s.laenge()
-    print(l2)
-
-    # alternativer Konstruktor
-    y1 = 0.0
-    x1 = 0.0
-    y2 = 10.0
-    x2 = 10.0
-
-    s2 = Strecke.init_koordinaten(y1, x1, y2, x2, "s2")
-    print(s2)
-
-    # alternativer Konstruktor 2
-    s3: Strecke = Strecke.init_ortsvektor(pe, "s3")
-    print(s3)
-
-    s4: Strecke = Strecke.init_leerstrecke("s4")
-    print(s4)

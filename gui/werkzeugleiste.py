@@ -16,7 +16,7 @@ class Werkzeugleiste(tk.Frame):
 
         self.initialisiere_gui()
 
-    def initialisiere_gui(self):
+    def initialisiere_gui(self) -> None:
         """Initialisieren der GUI der Werkzeugleiste.
 
         :return: None
@@ -32,15 +32,15 @@ class Werkzeugleiste(tk.Frame):
         tk.Button(self, image=self.__symbol_beenden, text="Beenden", command=self.werkzeug_beenden,
                   width=24, height=24).grid(row=0, column=1)
 
-    def werkzeug_datei_oeffnen(self):
+    def werkzeug_datei_oeffnen(self) -> None:
         """Ruft das "Datei öffnen"-Menü auf.
 
         :return: None
         :rtype: None
         """
-        self.master.menue_datei_oeffnen()
+        self.master.menue_datei_importieren()
 
-    def werkzeug_beenden(self):
+    def werkzeug_beenden(self) -> None:
         """Ruft das "Beenden-Menü" auf.
 
         :return: None

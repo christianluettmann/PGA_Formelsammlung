@@ -9,8 +9,8 @@ class Anwendung(tk.Frame):
     def __init__(self, master=None):
         """Initialisiert die Anwendung.
 
-                :param master: Anwendung
-                :type master: Anwendung
+                :param master: Berechnungsfenster
+                :type master: Berechnungsfenster
                 """
         super().__init__(master)
 
@@ -160,20 +160,17 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        pa_y = gui.eingabefeld_auswerten(self.__eingabe_pa_y)
-        pa_x = gui.eingabefeld_auswerten(self.__eingabe_pa_x)
-        pm_y = gui.eingabefeld_auswerten(self.__eingabe_pm_y)
-        pm_x = gui.eingabefeld_auswerten(self.__eingabe_pm_x)
-        pb_y = gui.eingabefeld_auswerten(self.__eingabe_pb_y)
-        pb_x = gui.eingabefeld_auswerten(self.__eingabe_pb_x)
-        r_na = gui.eingabefeld_auswerten(self.__eingabe_richtung_na)
-        r_nm = gui.eingabefeld_auswerten(self.__eingabe_richtung_nm)
-        r_nb = gui.eingabefeld_auswerten(self.__eingabe_richtung_nb)
+        pa: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_pa_y), gui.eingabefeld_auswerten(self.__eingabe_pa_x))
+        pm: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_pm_y), gui.eingabefeld_auswerten(self.__eingabe_pm_x))
+        pb: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_pb_y), gui.eingabefeld_auswerten(self.__eingabe_pb_x))
+        r_na: float = gui.eingabefeld_auswerten(self.__eingabe_richtung_na)
+        r_nm: float = gui.eingabefeld_auswerten(self.__eingabe_richtung_nm)
+        r_nb: float = gui.eingabefeld_auswerten(self.__eingabe_richtung_nb)
 
-        ergebnis = schnitte.rueckwaertsschnitt.Rueckwaertsschnitt.berechnen(pa_y, pa_x, pm_y, pm_x, pb_y, pb_x, r_na, r_nm, r_nb)
+        neupunkt = schnitte.rueckwaertsschnitt.Rueckwaertsschnitt.berechnen(pa, pm, pb, r_na, r_nm, r_nb)
 
-        gui.eingabefeld_schreiben(self.__ausgabe_pn_y, ergebnis[0])
-        gui.eingabefeld_schreiben(self.__ausgabe_pn_x, ergebnis[1])
+        gui.eingabefeld_schreiben(self.__ausgabe_pn_y, neupunkt.hole_y())
+        gui.eingabefeld_schreiben(self.__ausgabe_pn_x, neupunkt.hole_x())
 
     def testdaten_laden(self):
         """Lädt Testdaten für die Berechnung und führt die Berechnung durch.
@@ -247,6 +244,8 @@ class Anwendung(tk.Frame):
             self.__ausgabe_pn_nr.get(),
             0)   # TODO
         self.master.sende_punkt(p)
+
+# TODO: JSON einlesen und ausgeben
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ import tkinter as tk
 
 
 class Statusleiste(tk.Frame):
+
     def __init__(self, p_master=None):
         """Initialisiert die Statusleiste.
 

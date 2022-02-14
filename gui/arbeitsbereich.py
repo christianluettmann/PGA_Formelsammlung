@@ -19,16 +19,18 @@ class Arbeitsbereich(tk.Frame):
 
         self.initialisiere_gui()
 
-    def initialisiere_gui(self):
-        """
-        Initialisiert die GUI des Arbeitsbereiches.
+    def initialisiere_gui(self) -> None:
+        """Initialisiert die GUI des Arbeitsbereiches.
+
+        :return: None
+        :rtype: None
         """
         zeile = 0
 
         self.__tabelle.grid(row=zeile, column=0)
         zeile += 1
 
-    def setze_tabelle(self, p_pktlst: dict):
+    def setze_tabelle(self, p_pktlst: dict) -> None:
         """Erstellt die Tabelle aus der übergebenen Punktliste.
 
         :param p_pktlst: Punktliste
@@ -50,7 +52,7 @@ class Arbeitsbereich(tk.Frame):
         p: pkt.Punkt = self.__tabelle.hole_punkt(p_pktnr)
         return p
 
-    def sende_punkt(self, p_p: pkt.Punkt):
+    def sende_punkt(self, p_p: pkt.Punkt) -> None:
         """Gibt die Anfrage von der Main-Anwendung an die Tabelle weiter.
         (Punkt aus Berechnung in der Tabelle speichern)
 
@@ -60,3 +62,12 @@ class Arbeitsbereich(tk.Frame):
         :rtype: None
         """
         self.__tabelle.speicher_punkt(p_p)
+
+    def hole_punktliste(self) -> dict:
+        """Gibt die Anfrage von der Main-Anwendung an die Tabelle weiter.
+        (Punkliste aus Tabelle zum Export)
+
+        :return: Punktliste
+        :rtype: dict
+        """
+        return self.__tabelle.hole_punktliste()

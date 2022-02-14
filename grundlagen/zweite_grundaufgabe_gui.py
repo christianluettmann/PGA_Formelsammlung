@@ -10,8 +10,8 @@ class Anwendung(tk.Frame):
     def __init__(self, master=None):
         """Initialisiert die Anwendung
 
-        :param master: Anwendung
-        :type master: Anwendung
+        :param master: Berechnungsfenster
+        :type master: Berechnungsfenster
         """
         super().__init__(master)
 
@@ -159,10 +159,10 @@ class Anwendung(tk.Frame):
         p1: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p1_y), gui.eingabefeld_auswerten(self.__eingabe_p1_x))
         p2: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p2_y), gui.eingabefeld_auswerten(self.__eingabe_p2_x))
 
-        ergebnis: tuple = grundlagen.zweite_grundaufgabe.zweitegrundaufgabe(p1, p2)
+        strecke, richtungswinkel = grundlagen.zweite_grundaufgabe.zweite_grundaufgabe(p1, p2)
 
-        gui.eingabefeld_schreiben(self.__ausgabe_s12, ergebnis[0])
-        gui.eingabefeld_schreiben(self.__ausgabe_t12, ergebnis[1])
+        gui.eingabefeld_schreiben(self.__ausgabe_s12, strecke)
+        gui.eingabefeld_schreiben(self.__ausgabe_t12, richtungswinkel)
 
 
 if __name__ == "__main__":

@@ -9,8 +9,8 @@ class Anwendung(tk.Frame):
     def __init__(self, master=None):
         """Initialisiert die Anwendung.
 
-                :param master: Anwendung
-                :type master: Anwendung
+                :param master: Berechnungsfenster
+                :type master: Berechnungsfenster
                 """
         super().__init__(master)
 
@@ -172,21 +172,19 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        p1_y = gui.eingabefeld_auswerten(self.__eingabe_p1_y)
-        p1_x = gui.eingabefeld_auswerten(self.__eingabe_p1_x)
-        p2_y = gui.eingabefeld_auswerten(self.__eingabe_p2_y)
-        p2_x = gui.eingabefeld_auswerten(self.__eingabe_p2_x)
-        s1 = gui.eingabefeld_auswerten(self.__eingabe_s1_laenge)
-        s2 = gui.eingabefeld_auswerten(self.__eingabe_s2_laenge)
-        s3 = gui.eingabefeld_auswerten(self.__eingabe_s3_laenge)
+        p1: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p1_y), gui.eingabefeld_auswerten(self.__eingabe_p1_x))
+        p2: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p2_y), gui.eingabefeld_auswerten(self.__eingabe_p2_x))
+        s1: float = gui.eingabefeld_auswerten(self.__eingabe_s1_laenge)
+        s2: float = gui.eingabefeld_auswerten(self.__eingabe_s2_laenge)
+        s3: float = gui.eingabefeld_auswerten(self.__eingabe_s3_laenge)
 
-        ergebnis = schnitte.bogenschnitt.Bogenschnitt.berechnen(p1_y, p1_x, s1, p2_y, p2_x, s2, s3)
+        neupunkt1, neupunkt2, massstab = schnitte.bogenschnitt.Bogenschnitt.berechnen(p1, s1, p2, s2, s3)
 
-        gui.eingabefeld_schreiben(self.__ausgabe_pn1_y, ergebnis[0])
-        gui.eingabefeld_schreiben(self.__ausgabe_pn1_x, ergebnis[1])
-        gui.eingabefeld_schreiben(self.__ausgabe_pn2_y, ergebnis[2])
-        gui.eingabefeld_schreiben(self.__ausgabe_pn2_x, ergebnis[3])
-        gui.eingabefeld_schreiben(self.__ausgabe_massstab, ergebnis[4])
+        gui.eingabefeld_schreiben(self.__ausgabe_pn1_y, neupunkt1.hole_y())
+        gui.eingabefeld_schreiben(self.__ausgabe_pn1_x, neupunkt1.hole_x())
+        gui.eingabefeld_schreiben(self.__ausgabe_pn2_y, neupunkt2.hole_y())
+        gui.eingabefeld_schreiben(self.__ausgabe_pn2_x, neupunkt2.hole_x())
+        gui.eingabefeld_schreiben(self.__ausgabe_massstab, massstab)
 
     def testdaten_laden(self):
         """Lädt zufällige Testdaten für die Berechnung und führt die Berechnung durch.
@@ -259,6 +257,8 @@ class Anwendung(tk.Frame):
             self.__ausgabe_pn2_nr.get(),
             0)   # TODO
         self.master.sende_punkt(p)
+
+# TODO: JSON einlesen und ausgeben
 
 
 if __name__ == "__main__":

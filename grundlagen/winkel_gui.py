@@ -8,8 +8,8 @@ class Anwendung(tk.Frame):
     def __init__(self, master=None):
         """Initialisiert die Anwendung
 
-        :param master: Anwendung
-        :type master: Anwendung
+        :param master: Berechnungsfenster
+        :type master: Berechnungsfenster
         """
 
         super().__init__(master)

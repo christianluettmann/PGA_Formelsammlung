@@ -10,8 +10,8 @@ class Anwendung(tk.Frame):
     def __init__(self, master=None):
         """Initialisiert die Anwendung.
 
-        :param master: Anwendung
-        :type master: Anwendung
+        :param master: Berechnungsfenster
+        :type master: Berechnungsfenster
         """
         super().__init__(master)
 
@@ -114,10 +114,10 @@ class Anwendung(tk.Frame):
         s12: float = gui.eingabefeld_auswerten(self.__eingabe_s12)
         t12: float = gui.eingabefeld_auswerten(self.__eingabe_t12)
 
-        ergebnis: pkt.Punkt = grundlagen.erste_grundaufgabe.erste_grundaufgabe(p1, s12, t12)
+        neupunkt: pkt.Punkt = grundlagen.erste_grundaufgabe.erste_grundaufgabe(p1, s12, t12)
 
-        gui.eingabefeld_schreiben(self.__ausgabe_p2_y, ergebnis.hole_y())
-        gui.eingabefeld_schreiben(self.__ausgabe_p2_x, ergebnis.hole_x())
+        gui.eingabefeld_schreiben(self.__ausgabe_p2_y, neupunkt.hole_y())
+        gui.eingabefeld_schreiben(self.__ausgabe_p2_x, neupunkt.hole_x())
 
     def testdaten_laden(self):
         """Lädt zufällige Testdaten für die Berechnung und führt die Berechnung durch.

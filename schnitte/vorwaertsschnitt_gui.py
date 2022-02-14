@@ -9,8 +9,8 @@ class Anwendung(tk.Frame):
     def __init__(self, master=None):
         """Initialisiert die Anwendung.
 
-                :param master: Anwendung
-                :type master: Anwendung
+                :param master: Berechnungsfenster
+                :type master: Berechnungsfenster
                 """
         super().__init__(master)
 
@@ -215,6 +215,8 @@ class Anwendung(tk.Frame):
             self.__ausgabe_pn_nr.get(),
             0)   # TODO
         self.master.sende_punkt(p)
+
+# TODO: JSON einlesen und ausgeben
 
 
 if __name__ == "__main__":

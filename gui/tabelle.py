@@ -1,13 +1,10 @@
 import tkinter as tk
 import grundlagen.gui as gui
 import grundlagen.punkt as pkt
-import tkinter.messagebox as tkmb
+import grundlagen.punktliste as pktlst
 
 
 class Tabelle(tk.Frame):
-    """
-    Klasse Tabelle
-    """
 
     def __init__(self, p_master):
         """Initialisiert die Klasse Tabelle.
@@ -19,14 +16,16 @@ class Tabelle(tk.Frame):
 
         self.__zeilen_anzahl: int = 0
         self.__spalten_anzahl: int = 0
+
         # Punktliste
         self.__pktlst: dict = dict()
+
         # alle Eingabefelder zur Punktliste (als Instanzvariablen für den klassenweiten Zugriff aus allen Methoden)
         self.__eingabe_pktlst: dict = dict()
 
         self.grid()
 
-    def setze_punktliste(self, p_pktlst: dict):
+    def setze_punktliste(self, p_pktlst: dict) -> None:
         """Erstellt die Tabelle mit den Punkten.
 
         :param p_pktlst: Punktliste
@@ -53,7 +52,6 @@ class Tabelle(tk.Frame):
 
             # TODO: kann noch optimiert werden
             # Eintrag im Dict zur Aufnahme einer Tabellenzeile von Eingabefeldern
-            # self.__eingabe_pktlst[schluessel]: list = list()
             self.__eingabe_pktlst[schluessel]: dict = dict()
             spalte: int = 0
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "nr", wert.hole_nr())
@@ -63,10 +61,9 @@ class Tabelle(tk.Frame):
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "x", wert.hole_x())
             spalte += 1
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "epsg", wert.hole_epsg())
-            spalte += 1
             zeile += 1
 
-    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int, p_schluessel: str, p_atributname: str, p_atributwert: str):
+    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int, p_schluessel: str, p_atributname: str, p_atributwert: str) -> None:
         """Erzeugt ein Eingabefeld an der angegebenen Stellt mit den Werten.
 
         :param p_zeile: Zeilennummer
@@ -87,14 +84,12 @@ class Tabelle(tk.Frame):
         self.__eingabe_pktlst[p_schluessel][p_atributname].grid(row=p_zeile, column=p_spalte)
         gui.eingabefeld_schreiben(self.__eingabe_pktlst[p_schluessel][p_atributname], p_atributwert)
 
+    def aenderungen(self) -> None:
+        """Aktualisiert die Punktliste.
 
-    def aenderungen(self):
+        :return: None
+        :rtype: None
         """
-
-        :return:
-        :rtype:
-        """
-
         # Inhalt der Punktliste komplett löschen
         self.__pktlst.clear()
         # TODO: Soll wirklich die gesamte Tabelle wieder durchlaufen werden?
@@ -103,16 +98,13 @@ class Tabelle(tk.Frame):
             nr: str = self.__eingabe_pktlst[schluessel]["nr"].get()
             y: float = gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["y"])
             x: float = gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["x"])
-            epsg: int = gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["epsg"])
+            epsg: int = int(gui.eingabefeld_auswerten(self.__eingabe_pktlst[schluessel]["epsg"]))
 
             p: pkt.Punkt = pkt.Punkt(y, x, nr, epsg)
 
             self.__pktlst[nr] = p
 
-        print("Stop")
-        print(self.__pktlst)
-
-    def hole_punkt(self, p_pktnr):
+    def hole_punkt(self, p_pktnr) -> pkt.Punkt:
         """Gibt den Punkt aus der Tabelle zur übergebenen Punktnummer zurück.
         (Punkt aus Tabelle zur Berechnung)
 
@@ -122,13 +114,11 @@ class Tabelle(tk.Frame):
         :rtype: pkt.Punkt
         """
         try:
-            p: pkt.Punkt = self.__pktlst[p_pktnr]
             return self.__pktlst[p_pktnr]
-        except KeyError:
-            # tkmb.showinfo("FEHLER", "Die eingegebene Nummer ist nicht vorhanden!")
+        except KeyError:    # Die Punktnummer ist nicht vorhanden -> (0,0)-Punkt wird zurückgegeben
             return pkt.Punkt()
 
-    def speicher_punkt(self, p_p: pkt.Punkt):
+    def speicher_punkt(self, p_p: pkt.Punkt) -> None:
         """Speichert den übergebenen Punkt in der Tabelle.
         (Punkt aus Berechnung in der Tabelle speichern)
 
@@ -139,3 +129,12 @@ class Tabelle(tk.Frame):
         """
         self.__pktlst[p_p.hole_nr()] = p_p
         self.setze_punktliste(self.__pktlst)
+
+    def hole_punktliste(self) -> dict:
+        """Gibt die Punktliste als Dictionary zurück.
+        (Punkliste aus Tabelle zum Export)
+
+        :return: Punktliste
+        :rtype: dict
+        """
+        return pktlst.punktliste2json(self.__pktlst)

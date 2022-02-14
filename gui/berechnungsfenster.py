@@ -19,7 +19,7 @@ class Berechnungsfenster(tk.Toplevel):
         """
         return self.master.lade_punkt(p_pktnr)
 
-    def sende_punkt(self, p_p: pkt.Punkt):
+    def sende_punkt(self, p_p: pkt.Punkt) -> None:
         """Gibt die Anfrage von der Berechnung an die Main-Anwendung weiter.
         (Punkt aus Berechnung in der Tabelle speichern)
 

@@ -5,44 +5,46 @@ import grundlagen.erste_grundaufgabe_gui
 import grundlagen.zweite_grundaufgabe_gui
 import schnitte.rueckwaertsschnitt_gui
 import schnitte.vorwaertsschnitt_gui
-import gui.menue as mn
-import gui.werkzeugleiste as wl
-import gui.statusleiste as sl
-import gui.arbeitsbereich as ab
+import gui.menue
+import gui.werkzeugleiste
+import gui.statusleiste
+import gui.arbeitsbereich
 import tkinter.filedialog as tkfd
 import tkinter.messagebox as tkmb
 import schnitte.bogenschnitt_gui
 import grundlagen.punkt as pkt
 import gui.berechnungsfenster
 import grundlagen.punktliste as pktlst
+import gui.tabelle
 
 
 class Anwendung(tk.Tk):
 
     def __init__(self):
-        """
-        Initialisiert die Anwendung.
+        """Initialisiert die Anwendung.
+
         """
         super().__init__()
         self.minsize(600, 400)
         self.grid()
 
         # GUI
-        self.__menue = mn.Menue(self)
-        self.__werkzeugleiste = wl.Werkzeugleiste(self)
-        self.__statusleiste = sl.Statusleiste(self)
-        self.__arbeitsbereich = ab.Arbeitsbereich(self)
+        self.__menue = gui.menue.Menue(self)
+        self.__werkzeugleiste = gui.werkzeugleiste.Werkzeugleiste(self)
+        self.__statusleiste = gui.statusleiste.Statusleiste(self)
+        self.__arbeitsbereich = gui.arbeitsbereich.Arbeitsbereich(self)
 
         # DATEN
         self.__pktlst: dict = {}
 
         self.initialisiere_gui()
 
-    def initialisiere_gui(self):
-        """
-        Initialisiert die GUI.
-        """
+    def initialisiere_gui(self) -> None:
+        """Initialisiert die GUI.
 
+        :return: None
+        :rtype: None
+        """
         # Menü
         self.config(menu=self.__menue)
 
@@ -64,12 +66,12 @@ class Anwendung(tk.Tk):
         grundlagen.winkel_gui.Anwendung(top)
 
     @staticmethod
-    def fenster_erstega():
+    def fenster_erste_grundaufgabe():
         top = gui.berechnungsfenster.Berechnungsfenster()
         grundlagen.erste_grundaufgabe_gui.Anwendung(top)
 
     @staticmethod
-    def fenster_zweitega():
+    def fenster_zweite_grundaufgabe():
         top = gui.berechnungsfenster.Berechnungsfenster()
         grundlagen.zweite_grundaufgabe_gui.Anwendung(top)
 
@@ -92,34 +94,43 @@ class Anwendung(tk.Tk):
     def menue_tut_nix():
         tkmb.showinfo("TODO", "Hier passiert noch nix!")
 
-    def menue_datei_oeffnen(self):  #TODO: Was passiert, wenn die JSON-Datei keine Punktliste ist?
+    def menue_datei_importieren(self) -> None:
+        """Öffnet eine JSON-Datei mit einer Punktliste und schreibt diese in die Tabelle.
 
-        dateitypen = (
-            ('JSON-Dateien', '*.json'),
-            ('Alle Dateien', '*.*')
-        )
-
+        :return: None
+        :rtype: None
+        """
+        # TODO: Was passiert, wenn die JSON-Datei keine Punktliste ist?
+        # Datei festlegen
         dateiname = tkfd.askopenfilename(
             title="Datei öffnen",
-            initialdir="/",
-            filetypes=dateitypen
+            initialdir="/Desktop",
+            filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*'))
             )
-
-        # JSON aus Datei
+        # JSON-Daten aus Datei lesen
         with open(dateiname) as json_datei:
             json_daten = json.load(json_datei)
-
             self.__pktlst = pktlst.json2punktliste(json_daten).copy()
-
-            # self.__arbeitsbereich.setze_text(json.dumps(json_daten, sort_keys=True, indent=4))
-
-            # for schluessel, wert in self.__pktlst.items():
-            #     self.__arbeitsbereich.setze_text((str(wert)+"\n"))
-
             self.__arbeitsbereich.setze_tabelle(self.__pktlst)
 
-    def menue_exportieren(self):
-        pass
+    def menue_exportieren(self) -> None:
+        """Schreibt den Inhalt der Punktliste in eine JSON-Datei.
+
+        :return: None
+        :rtype: None
+        """
+        # Datei festlegen
+        dateiname = tkfd.asksaveasfile(
+            mode="w",
+            title="Datei exportieren",
+            initialdir="/Desktop",
+            defaultextension=".json",
+            filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*')),
+        )
+        # JSON-Datei schreiben
+        inhalt = json.dumps(self.__arbeitsbereich.hole_punktliste(), indent=4)
+        dateiname.write(inhalt)
+        dateiname.close()
 
     def menue_beenden(self):
         self.destroy()
@@ -135,7 +146,7 @@ class Anwendung(tk.Tk):
         """
         return self.__arbeitsbereich.hole_punkt(p_pktnr)
 
-    def sende_punkt(self, p_p: pkt.Punkt):
+    def sende_punkt(self, p_p: pkt.Punkt) -> None:
         """Gibt die Anfrage vom Berechnungsfenster an den Arbeitsbereich weiter.
         (Punkt aus Berechnung in der Tabelle speichern)
 

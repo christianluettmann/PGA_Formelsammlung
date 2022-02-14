@@ -1,7 +1,8 @@
 class Punkt:
     """Klasse Punkt
 
-    :todo: Brauchen wir für den EPSG-Code auch einen Setter? Oder ist bei der Änderung zwangweise eine Transformation notwendig?
+    TODO: Brauchen wir für den EPSG-Code auch einen Setter?
+    Oder ist bei der Änderung zwangweise eine Transformation notwendig?
 
     """
     def __init__(self, p_y: float = 0.0, p_x: float = 0.0, p_nr: str = "", p_epsg: int = 0):
@@ -21,7 +22,7 @@ class Punkt:
         self.__nr: str = p_nr
         self.__epsg: int = p_epsg
 
-    def setze_y(self, p_y: float):
+    def setze_y(self, p_y: float) -> None:
         """Setter für y-Koordinate.
 
         :param p_y: y-Koordinate bzw. Rechtswert
@@ -31,7 +32,7 @@ class Punkt:
         """
         self.__y = p_y
 
-    def setze_x(self, p_x: float):
+    def setze_x(self, p_x: float) -> None:
         """Setter für x-Koordinate.
 
         :param p_x: x-Koordinate bzw. Hochwert
@@ -41,7 +42,7 @@ class Punkt:
         """
         self.__x = p_x
 
-    def setze_nr(self, p_nr: str):
+    def setze_nr(self, p_nr: str) -> None:
         """Setter für Punktnummer.
 
         :param p_nr: alphanumerische Punktnummer
@@ -93,7 +94,7 @@ class Punkt:
             self.__epsg)
         return zeichenkette
 
-    def hole_json(self):
+    def hole_json(self) -> dict:
         """Gibt den Punkt in JSON-Format bzw. als Dictionary zurück.
 
         :return: JSON/Dictionary
@@ -101,7 +102,7 @@ class Punkt:
         """
         return self.__dict__
 
-    def setze_json(self, p_dict):
+    def setze_json(self, p_dict) -> None:
         """Setzt die Attribute eines Punktes mit den Werten des Dictionaries.
 
         :param p_dict: JSON/Dictionary
@@ -111,14 +112,4 @@ class Punkt:
         """
         # Iteration über alle Elemente im Dictionary
         for schluessel, wert in p_dict.items():
-            print(schluessel + ":" + str(wert))
             setattr(self, schluessel, wert)
-
-
-if __name__ == "__main__":
-
-    p1 = Punkt(42.6, 43.0, "P1", 25832)
-    print(p1.hole_y())
-    print(p1.hole_x())
-    print(p1.hole_nr())
-    print(p1)
