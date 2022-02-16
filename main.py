@@ -1,21 +1,28 @@
 import json
+
 import tkinter as tk
+import tkinter.filedialog as tkfd
+import tkinter.messagebox as tkmb
+
+import grundlagen.punkt as pkt
+import grundlagen.punktliste as pktlst
 import grundlagen.winkel_gui
 import grundlagen.erste_grundaufgabe_gui
 import grundlagen.zweite_grundaufgabe_gui
+
 import schnitte.rueckwaertsschnitt_gui
 import schnitte.vorwaertsschnitt_gui
+import schnitte.bogenschnitt_gui
+
 import gui.menue
 import gui.werkzeugleiste
 import gui.statusleiste
 import gui.arbeitsbereich
-import tkinter.filedialog as tkfd
-import tkinter.messagebox as tkmb
-import schnitte.bogenschnitt_gui
-import grundlagen.punkt as pkt
 import gui.berechnungsfenster
-import grundlagen.punktliste as pktlst
 import gui.tabelle
+
+import polygonzug_package.polygonzug_beidseitig_gui
+import polygonzug_package.polygonzug_ring_gui
 
 
 class Anwendung(tk.Tk):
@@ -89,6 +96,16 @@ class Anwendung(tk.Tk):
     def fenster_vorwaertsschnitt():
         top = gui.berechnungsfenster.Berechnungsfenster()
         schnitte.vorwaertsschnitt_gui.Anwendung(top)
+
+    @staticmethod
+    def fenster_polygonzug_beidseitig():
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        polygonzug_package.polygonzug_beidseitig_gui.Anwendung(top)
+
+    @staticmethod
+    def fenster_polygonzug_ring():
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        polygonzug_package.polygonzug_ring_gui.Anwendung(top)
 
     @staticmethod
     def menue_tut_nix():

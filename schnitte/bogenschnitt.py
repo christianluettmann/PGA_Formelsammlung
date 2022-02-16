@@ -8,6 +8,7 @@ class Bogenschnitt:
     def berechnen(p_p1: pkt.Punkt, p_s1: float, p_p2: pkt.Punkt, p_s2: float, p_s3: float = 0) -> tuple:
         """Berechnet den Bogenschnitt von zwei Punkten. Wenn die Strecke zwischen den bekannten Punkten
         gemessen wurde (=/= 0) wird ein Maßstab berücksichtigt.
+        (Gruber, Joeckel: Formelsammlung für das Vermessungswesen, 18. Auflage, S. 84)
 
         :param p_p1: erster Punkt
         :type p_p1: pkt.Punkt

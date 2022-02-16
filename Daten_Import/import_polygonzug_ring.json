@@ -1,0 +1,34 @@
+{
+   "Messung":[
+      {
+         "Punktnummer":"P1",
+         "Beta":256.1980,
+         "Strecke":294.13
+      },
+      {
+         "Punktnummer":"P2",
+         "Beta":268.0269,
+         "Strecke":255.25
+      },
+      {
+         "Punktnummer":"P3",
+         "Beta":261.9111,
+         "Strecke":271.84
+      },
+      {
+         "Punktnummer":"P4",
+         "Beta":278.1518,
+         "Strecke":308.14
+      },
+      {
+         "Punktnummer":"P5",
+         "Beta":260.1032,
+         "Strecke":282.51
+      },
+      {
+         "Punktnummer":"P6",
+         "Beta":275.6066,
+         "Strecke":232.03
+      }
+   ]
+}

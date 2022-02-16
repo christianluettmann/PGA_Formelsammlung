@@ -104,8 +104,8 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_berechnungen_polygonzug.add_command(label="beidseitig angeschlossen", command=self.master.menue_tut_nix)
-        self.__menue_berechnungen_polygonzug.add_command(label="Ring", command=self.master.menue_tut_nix)
+        self.__menue_berechnungen_polygonzug.add_command(label="beidseitig angeschlossen", command=self.master.fenster_polygonzug_beidseitig)
+        self.__menue_berechnungen_polygonzug.add_command(label="Ring", command=self.master.fenster_polygonzug_ring)
 
     def menue_transformationen(self) -> None:
         """Initialisiert das Transformationen-Menü.

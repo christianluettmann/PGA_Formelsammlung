@@ -9,7 +9,7 @@ class Rueckwaertsschnitt:
     def berechnen(p_pa: pkt.Punkt, p_pm: pkt.Punkt, p_pb: pkt.Punkt,
                   p_r_na: float, p_r_nm: float, p_r_nb: float) -> pkt.Punkt:
         """Berechnet den Rückwärtsschnitt nach Cassini. ACHTUNG: Die Punkte müssen im Uhrzeigersinn übergeben werden!
-        (Quelle: Formelsammlung für das Vermessungswesen (Gruber, Joeckel))
+        (Gruber, Joeckel: Formelsammlung für das Vermessungswesen, 18. Auflage, S. 87)
 
         :param p_pa: linker Punkt
         :type p_pa: pkt.Punkt
