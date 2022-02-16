@@ -15,7 +15,9 @@ class Anwendung(tk.Frame):
         super().__init__(master)
         self.grid()
 
-        tk.Label(self, text="Winkelumrechnung").grid(row=0, columnspan=3)
+        self.master.title("Winkelumrechnung")
+
+        tk.Label(self, text="Winkelumrechnung", font=("arial", 14, "underline")).grid(row=0, columnspan=3)
 
         tk.Label(self, text="Rad:").grid(row=1)
         tk.Label(self, text="Deg:").grid(row=2)
@@ -29,11 +31,11 @@ class Anwendung(tk.Frame):
         self.eingabedeg.grid(row=2, column=1)
         self.eingabegon.grid(row=3, column=1)
 
-        tk.Button(self, text="Umrechnen", command=self.umrechnenrad).grid(row=1, column=2)
-        tk.Button(self, text="Umrechnen", command=self.umrechnendeg).grid(row=2, column=2)
-        tk.Button(self, text="Umrechnen", command=self.umrechnengon).grid(row=3, column=2)
+        tk.Button(self, text="Umrechnen", command=self.umrechnenrad, fg="blue").grid(row=1, column=2)
+        tk.Button(self, text="Umrechnen", command=self.umrechnendeg, fg="blue").grid(row=2, column=2)
+        tk.Button(self, text="Umrechnen", command=self.umrechnengon, fg="blue").grid(row=3, column=2)
 
-        tk.Button(self, text="Beenden", command=self.master.destroy).grid(row=4, columnspan=3)
+        tk.Button(self, text="Beenden", command=self.master.destroy, fg="red").grid(row=4, column=1, sticky="ew")
 
     def umrechnenrad(self):
         rad: float = gui.eingabefeld_auswerten(self.eingaberad)

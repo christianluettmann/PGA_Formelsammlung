@@ -1,5 +1,8 @@
 import tkinter as tk
+import tkinter.filedialog as tkfd
+import json
 import grundlagen.punkt as pkt
+import grundlagen.punktliste as pktlst
 
 
 class Berechnungsfenster(tk.Toplevel):
@@ -29,3 +32,46 @@ class Berechnungsfenster(tk.Toplevel):
         :rtype: None
         """
         self.master.sende_punkt(p_p)
+
+
+def import_json_dialog() -> dict:
+    """Importdialog fuer das Laden von JSON-Dateien.
+
+            :return: JSON-Daten
+            :rtype: dict
+            """
+    # Datei festlegen
+    dateiname: str = tkfd.askopenfilename(
+        title="Polygonzug laden",
+        initialdir="./Daten_Import",
+        defaultextension=".json",
+        filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*')),
+    )
+    # JSON-Daten aus Datei lesen
+    with open(dateiname) as json_datei:
+        json_daten: dict = json.load(json_datei)
+    return json_daten
+
+
+def export_json_dialog(punkte) -> None:
+    """Exportdialog für das Speichern von Punkten.
+
+    :param punkte: Dictionary mit den zu exportierenden Punkten
+    :type punkte: dict[pkt.Punkt]
+    :return: None
+    :rtype: None
+    """
+    # Datei festlegen
+    dateiname = tkfd.asksaveasfile(
+        mode="w",
+        title="Punkte exportieren",
+        initialdir="./Daten_Export",
+        defaultextension=".json",
+        filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*')),
+    )
+    # JSON-Datei schreiben
+
+    punktliste: dict = pktlst.punktliste2json(punkte)
+    inhalt: str = json.dumps(punktliste, indent=4)
+    dateiname.write(inhalt)
+    dateiname.close()

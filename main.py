@@ -11,7 +11,8 @@ import grundlagen.erste_grundaufgabe_gui
 import grundlagen.zweite_grundaufgabe_gui
 
 import schnitte.rueckwaertsschnitt_gui
-import schnitte.vorwaertsschnitt_gui
+import schnitte.vorwaertsschnitt_dreieckswinkel_gui
+import schnitte.vorwaertsschnitt_richtungswinkel_gui
 import schnitte.bogenschnitt_gui
 
 import gui.menue
@@ -67,6 +68,9 @@ class Anwendung(tk.Tk):
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
 
+        self.option_add("*font", "arial 11")
+        self.title("PGA Formelsammlung")
+
     @staticmethod
     def fenster_winkel():
         top = gui.berechnungsfenster.Berechnungsfenster()
@@ -93,9 +97,14 @@ class Anwendung(tk.Tk):
         schnitte.rueckwaertsschnitt_gui.Anwendung(top)
 
     @staticmethod
-    def fenster_vorwaertsschnitt():
+    def fenster_vorwaertsschnitt_dreieckswinkel():
         top = gui.berechnungsfenster.Berechnungsfenster()
-        schnitte.vorwaertsschnitt_gui.Anwendung(top)
+        schnitte.vorwaertsschnitt_dreieckswinkel_gui.Anwendung(top)
+
+    @staticmethod
+    def fenster_vorwaertsschnitt_richtungswinkel():
+        top = gui.berechnungsfenster.Berechnungsfenster()
+        schnitte.vorwaertsschnitt_richtungswinkel_gui.Anwendung(top)
 
     @staticmethod
     def fenster_polygonzug_beidseitig():

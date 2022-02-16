@@ -1,0 +1,40 @@
+{
+   "Punkte":{
+      "P1":{
+         "_Punkt__y":1019.12,
+         "_Punkt__x":3157.62,
+         "_Punkt__nr":"P1",
+         "_Punkt__epsg":0
+      },
+      "P2":{
+         "_Punkt__y":1111.88,
+         "_Punkt__x":3080.35,
+         "_Punkt__nr":"P2",
+         "_Punkt__epsg":0
+      }
+   },
+   "Messung":{
+      "R_1N":{
+         "Punktnummer_N":"P1",
+         "Punktnummer_A":"PN",
+         "Richtung":10.1
+      },
+      "R_12":{
+         "Punktnummer_N":"P1",
+         "Punktnummer_B":"P2",
+         "Richtung":74.4025
+      },
+
+      "R_2N":{
+         "Punktnummer_N":"P2",
+         "Punktnummer_B":"PN",
+         "Richtung":0.0
+      },
+
+      "R_21":{
+         "Punktnummer_N":"P2",
+         "Punktnummer_B":"P1",
+         "Richtung":331.1513
+      }
+   }
+}

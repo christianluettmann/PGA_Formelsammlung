@@ -30,29 +30,29 @@ class Anwendung(tk.Frame):
         zeile: int = 0
         spalten_max: int = 3
 
-        self.master.title("1. Grundaufgabe")
+        self.master.title("1. geodätische Grundaufgabe")
 
         # Eingabe
-        tk.Label(self, text="Eingabe:").grid(row=zeile)
-        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden).grid(row=zeile, column=2, sticky="e")
+        tk.Label(self, text="Eingabe:", font=("arial", 14, "underline")).grid(row=zeile)
+        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(row=zeile, column=2, sticky="e")
         zeile += 1
 
         # Eingabe: Punkt1
-        tk.Label(self, text="Punkt1:").grid(row=zeile, sticky="w")
+        tk.Label(self, text="Punkt 1:").grid(row=zeile, sticky="ew")
         # Koordinaten laden
         if __name__ != "__main__":
             self.__eingabe_p1_nr.grid(row=zeile, column=1, sticky="ew")
             tk.Button(self,
-                      text="Punkt1 laden",
+                      text="Punkt 1 laden",
                       command=lambda: self.lade_punkt(self.__eingabe_p1_nr.get()))\
                 .grid(row=zeile, sticky="w", column=2)
         zeile += 1
         # Koordinaten eingeben
-        tk.Label(self, text="y1:").grid(row=zeile)
+        tk.Label(self, text="y 1:").grid(row=zeile)
         self.__eingabe_p1_y.grid(row=zeile, column=1, sticky="ew")
         tk.Label(self, text="[m]").grid(row=zeile, column=2, sticky="w")
         zeile += 1
-        tk.Label(self, text="x1:").grid(row=zeile)
+        tk.Label(self, text="x 1:").grid(row=zeile)
         self.__eingabe_p1_x.grid(row=zeile, column=1, sticky="ew")
         tk.Label(self, text="[m]").grid(row=zeile, column=2, sticky="w")
         zeile += 1
@@ -74,35 +74,37 @@ class Anwendung(tk.Frame):
         zeile += 1
 
         # Berechnen Button
-        tk.Button(self, text="Berechnen", command=self.berechnen).grid(row=zeile, columnspan=spalten_max)
+        tk.Button(self, text="Berechnen", command=self.berechnen, fg="blue").grid(row=zeile, column=1, sticky="ew")
         zeile += 1
 
         # Ausgabe
-        tk.Label(self, text="Ausgabe:").grid(row=zeile)
+        tk.Label(self, text="Ausgabe:", font=("arial", 14, "underline")).grid(row=zeile)
         zeile += 1
 
         # Ausgabe:Punkt2
-        tk.Label(self, text="Punkt2:").grid(row=zeile, sticky="w", columnspan=spalten_max)
+        tk.Label(self, text="Punkt 2:").grid(row=zeile, sticky="ew")
         # Koordinaten laden
         if __name__ != "__main__":
             self.__ausgabe_p2_nr.grid(row=zeile, column=1, sticky="ew")
             tk.Button(self,
-                      text="Punkt2 speichern",
+                      text="Punkt 2 speichern",
                       command=self.speicher_punkt) \
                 .grid(row=zeile, sticky="w", column=2)
         zeile += 1
         # Koordinaten eingeben
-        tk.Label(self, text="y2:").grid(row=zeile)
+        tk.Label(self, text="y 2:").grid(row=zeile)
         self.__ausgabe_p2_y.grid(row=zeile, column=1, sticky="ew")
         tk.Label(self, text="[m]").grid(row=zeile, column=2, sticky="w")
         zeile += 1
-        tk.Label(self, text="x2:").grid(row=zeile)
+        tk.Label(self, text="x 2:").grid(row=zeile)
         self.__ausgabe_p2_x.grid(row=zeile, column=1, sticky="ew")
         tk.Label(self, text="[m]").grid(row=zeile, column=2, sticky="w")
         zeile += 1
+        tk.Label(self, text="").grid(row=zeile, column=0, columnspan=3)
+        zeile += 1
 
         # Beenden Button
-        tk.Button(self, text="Beenden", fg="red", command=self.master.destroy).grid(row=zeile, columnspan=spalten_max)
+        tk.Button(self, text="Beenden", fg="red", command=self.master.destroy).grid(row=zeile, column=1, sticky="ew")
 
     def berechnen(self):
         """Übergibt die Eingabewerte an die Berechnungsmethode und schreibt die berechneten Werte in die Ausgabefelder.

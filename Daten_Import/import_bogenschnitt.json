@@ -1,0 +1,33 @@
+{
+   "Punkte":{
+      "P1":{
+         "_Punkt__y":328.76,
+         "_Punkt__x":1207.85,
+         "_Punkt__nr":"P1",
+         "_Punkt__epsg":40400
+      },
+      "P2":{
+         "_Punkt__y":925.04,
+         "_Punkt__x":954.33,
+         "_Punkt__nr":"P2",
+         "_Punkt__epsg":40400
+      }
+   },
+   "Messung":{
+      "S1":{
+         "Punktnummer_A":"P1",
+         "Punktnummer_E":"PN",
+         "Strecke":294.33
+      },
+      "S2":{
+         "Punktnummer_A":"P2",
+         "Punktnummer_E":"PN",
+         "Strecke":506.42
+      },
+      "S3":{
+         "Punktnummer_A":"P1",
+         "Punktnummer_E":"P2",
+         "Strecke":648.08
+      }
+   }
+}

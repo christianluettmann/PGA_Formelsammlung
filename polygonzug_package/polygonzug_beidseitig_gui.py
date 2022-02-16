@@ -3,6 +3,7 @@ import tkinter.filedialog as tkfd
 import json
 
 import grundlagen.gui as gui
+import gui.berechnungsfenster as berechnungsfenster
 import grundlagen.punkt as pkt
 import grundlagen.punktliste as pktlst
 import polygonzug_package.polygonzug as pz
@@ -47,19 +48,19 @@ class Anwendung(tk.Frame):
 
         zeile: int = 0
         # Buttons
-        tk.Button(self, text="Polygonzug laden", command=self.importieren_berechnen).grid(row=zeile, column=0, columnspan=3)
-        tk.Button(self, text="Neupunkte exportieren", command=self.exportieren).grid(row=zeile, column=4, columnspan=3)
+        tk.Button(self, text="Polygonzug laden", command=self.importieren_berechnen, fg="purple").grid(row=zeile, column=0, columnspan=2, sticky="ew")
+        tk.Button(self, text="Neupunkte exportieren", command=self.exportieren, fg="purple").grid(row=zeile, column=9, columnspan=2, sticky="ew")
         zeile += 1
 
         # Überschriften
-        tk.Label(self, text="Punktnummer").grid(row=zeile, column=0)
-        tk.Label(self, text="Brechungswinkel").grid(row=zeile, column=1)
+        tk.Label(self, text="Punktnummer", font="arial 11 underline").grid(row=zeile, column=0)
+        tk.Label(self, text="Brechungswinkel", font="arial 11 underline").grid(row=zeile, column=1)
         tk.Label(self, text="    ").grid(row=zeile, column=2)
-        tk.Label(self, text="Richtungswinkel").grid(row=zeile, column=3)
-        tk.Label(self, text="Strecke").grid(row=zeile, column=4)
-        tk.Label(self, text="Koordinatendifferenzen").grid(row=zeile, column=5, columnspan=2)
+        tk.Label(self, text="Richtungswinkel", font="arial 11 underline").grid(row=zeile, column=3)
+        tk.Label(self, text="Strecke", font="arial 11 underline").grid(row=zeile, column=4)
+        tk.Label(self, text="Koordinatendifferenzen", font="arial 11 underline").grid(row=zeile, column=5, columnspan=2)
         tk.Label(self, text="    ").grid(row=zeile, column=7)
-        tk.Label(self, text="Koordinaten").grid(row=zeile, column=9, columnspan=2)
+        tk.Label(self, text="Koordinaten", font="arial 11 underline").grid(row=zeile, column=9, columnspan=2)
         zeile += 1
 
         tk.Label(self, text="i").grid(row=zeile, column=0)
@@ -89,6 +90,7 @@ class Anwendung(tk.Frame):
         # Anschlusspunkt
         zeile: int = 3
         spalte: int = 0
+        print("Stop")
         self.__feld_p0_nr.grid(row=zeile, column=spalte)
         gui.eingabefeld_schreiben(self.__feld_p0_nr, self.__p0.hole_nr())
         spalte += 9
@@ -109,9 +111,9 @@ class Anwendung(tk.Frame):
             spalte += 1
             self.erzeuge_eingabefeld(zeile, spalte, i, "Beta", messung["Beta"])
             spalte += 1
-            tk.Label(self, text="⮷", font="Calibri 15").grid(row=zeile, column=spalte)
+            tk.Label(self, text="⮷", font="arial 15").grid(row=zeile, column=spalte)
             spalte += 6
-            tk.Label(self, text="⮳", font="Calibri 15").grid(row=zeile, column=spalte)
+            tk.Label(self, text="⮳", font="arial 15").grid(row=zeile, column=spalte)
             spalte += 1
             self.erzeuge_eingabefeld(zeile, spalte, i, "Punkt", messung["Punkt"].hole_y())
             spalte += 1
@@ -140,8 +142,8 @@ class Anwendung(tk.Frame):
         zeile += 1
 
         # Abweichungen
-        tk.Label(self, text="Winkelabweichung").grid(row=zeile, column=1)
-        tk.Label(self, text="Koordinatenabweichungen").grid(row=zeile, column=5, columnspan=2)
+        tk.Label(self, text="Winkelabweichung", font="arial 11 underline").grid(row=zeile, column=1)
+        tk.Label(self, text="Koordinatenabweichungen", font="arial 11 underline").grid(row=zeile, column=5, columnspan=2)
         zeile += 1
         tk.Label(self, text="Y").grid(row=zeile, column=5)
         tk.Label(self, text="X").grid(row=zeile, column=6)
@@ -180,23 +182,13 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        # Datei festlegen
-        dateiname: str = tkfd.askopenfilename(
-            title="Polygonzug laden",
-            initialdir="./Daten_Import",
-            defaultextension=".json",
-            filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*')),
-        )
-        # JSON-Daten aus Datei lesen
-        with open(dateiname) as json_datei:
-            json_daten: dict = json.load(json_datei)
+        json_daten = berechnungsfenster.import_json_dialog()
 
-            self.__p0.setze_json(json_daten["Anschlusspunkte"]["Start_Anschluss"])
-            self.__p1.setze_json(json_daten["Anschlusspunkte"]["Start"])
-            self.__pn.setze_json(json_daten["Anschlusspunkte"]["Ende"])
-            self.__pn_1.setze_json(json_daten["Anschlusspunkte"]["Ende_Anschluss"])
-            self.__messung: list = json_daten["Messung"]
-
+        self.__p0.setze_json(json_daten["Anschlusspunkte"]["Start_Anschluss"])
+        self.__p1.setze_json(json_daten["Anschlusspunkte"]["Start"])
+        self.__pn.setze_json(json_daten["Anschlusspunkte"]["Ende"])
+        self.__pn_1.setze_json(json_daten["Anschlusspunkte"]["Ende_Anschluss"])
+        self.__messung: list = json_daten["Messung"]
         self.berechnen()
 
     def berechnen(self) -> None:
@@ -215,17 +207,7 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        # Datei festlegen
-        dateiname = tkfd.asksaveasfile(
-            mode="w",
-            title="Punkte exportieren",
-            initialdir="./Daten_Export",
-            defaultextension=".json",
-            filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*')),
-        )
-        # JSON-Datei schreiben
+        # Daten zusammenstellen
         punkte: dict = {i["Punktnummer"]: i["Punkt"] for i in self.__messung[1:-1]}
-        punktliste: dict = pktlst.punktliste2json(punkte)
-        inhalt: str = json.dumps(punktliste, indent=4)
-        dateiname.write(inhalt)
-        dateiname.close()
+
+        berechnungsfenster.export_json_dialog(punkte)

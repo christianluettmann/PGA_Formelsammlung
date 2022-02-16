@@ -1,0 +1,52 @@
+{
+   "Punkte":{
+      "P1":{
+         "_Punkt__y":24681.92,
+         "_Punkt__x":90831.87,
+         "_Punkt__nr":"P1",
+         "_Punkt__epsg":0
+      },
+      "P2":{
+         "_Punkt__y":24877.72,
+         "_Punkt__x":89251.09,
+         "_Punkt__nr":"P2",
+         "_Punkt__epsg":0
+      },
+     "P3":{
+         "_Punkt__y":23231.58,
+         "_Punkt__x":91422.92,
+         "_Punkt__nr":"P3",
+         "_Punkt__epsg":0
+      },
+     "P4":{
+         "_Punkt__y":22526.65,
+         "_Punkt__x":89150.52,
+         "_Punkt__nr":"P4",
+         "_Punkt__epsg":0
+      }
+   },
+   "Messung":{
+      "R_1N":{
+         "Punktnummer_N":"P1",
+         "Punktnummer_A":"PN",
+         "Richtung":331.6174
+      },
+      "R_13":{
+         "Punktnummer_N":"P1",
+         "Punktnummer_B":"P3",
+         "Richtung":0.0
+      },
+
+      "R_2N":{
+         "Punktnummer_N":"P2",
+         "Punktnummer_B":"PN",
+         "Richtung":60.7510
+      },
+
+      "R_24":{
+         "Punktnummer_N":"P2",
+         "Punktnummer_B":"P4",
+         "Richtung":0.0
+      }
+   }
+}

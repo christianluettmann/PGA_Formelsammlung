@@ -94,7 +94,8 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt", command=self.master.fenster_vorwaertsschnitt)
+        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt-Dreieckswinkel", command=self.master.fenster_vorwaertsschnitt_dreieckswinkel)
+        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt-Richtungswinkel", command=self.master.fenster_vorwaertsschnitt_richtungswinkel)
         self.__menue_berechnungen_schnitte.add_command(label="Rückwärtsschnitt", command=self.master.fenster_rueckwaertsschnitt)
         self.__menue_berechnungen_schnitte.add_command(label="Bogenschnitt", command=self.master.fenster_bogenschnitt)
 
