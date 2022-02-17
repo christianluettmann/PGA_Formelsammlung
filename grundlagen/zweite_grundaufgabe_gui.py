@@ -1,8 +1,8 @@
 import tkinter as tk
-import grundlagen.zweite_grundaufgabe
-import grundlagen.punkt as pkt
+
 import grundlagen.gui as gui
-import random
+import grundlagen.punkt as pkt
+import grundlagen.zweite_grundaufgabe
 
 
 class Anwendung(tk.Frame):
@@ -34,18 +34,17 @@ class Anwendung(tk.Frame):
 
         # Eingabe
         tk.Label(self, text="Eingabe:", font=("arial", 14, "underline")).grid(row=zeile)
-        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(row=zeile, column=2, sticky="e")
+        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(row=zeile, column=2,
+                                                                                               sticky="e")
         zeile += 1
 
-        # Eingabe: Punkt1
+        # Eingabe: Punkt 1
         tk.Label(self, text="Punkt 1:").grid(row=zeile, sticky="ew")
         # Koordinaten laden
         if __name__ != "__main__":
             self.__eingabe_p1_nr.grid(row=zeile, column=1, sticky="ew")
-            tk.Button(self,
-                      text="Punkt 1 laden",
-                      command=lambda: self.lade_punkt1(self.__eingabe_p1_nr.get()))\
-                .grid(row=zeile, sticky="w", column=2)
+            tk.Button(self, text="Punkt 1 laden", command=lambda: self.lade_punkt1(self.__eingabe_p1_nr.get())).grid(
+                row=zeile, sticky="w", column=2)
         zeile += 1
         # Koordinaten eingeben
         tk.Label(self, text="y 1:").grid(row=zeile)
@@ -57,15 +56,13 @@ class Anwendung(tk.Frame):
         tk.Label(self, text="[m]").grid(row=zeile, column=2, sticky="w")
         zeile += 1
 
-        # Eingabe: Punkt2
+        # Eingabe: Punkt 2
         tk.Label(self, text="Punkt 2:").grid(row=zeile, column=0)
         # Koordinaten laden
         if __name__ != "__main__":
             self.__eingabe_p2_nr.grid(row=zeile, column=1, sticky="ew")
-            tk.Button(self,
-                      text="Punkt 2 laden",
-                      command=lambda: self.lade_punkt2(self.__eingabe_p2_nr.get())) \
-                .grid(row=zeile, sticky="w", column=2)
+            tk.Button(self, text="Punkt 2 laden", command=lambda: self.lade_punkt2(self.__eingabe_p2_nr.get())).grid(
+                row=zeile, sticky="w", column=2)
         zeile += 1
         # Koordinaten eingeben
         tk.Label(self, text="y 2:").grid(row=zeile)
@@ -111,11 +108,6 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        # self ist ein Frame
-        # self.master ist das Toplevel-Fenster, dass den Frame enthält
-        # self.master.master ist die Hauptanwendung, aus der das Toplevel-Fenster aufgerufen wird
-        # self.master.master.__arbeitsbereich ist Instanzvariable
-        # je eine hole_punkt Methode in jedem master
         p: pkt.Punkt = self.master.lade_punkt(p_pktnr)
         gui.eingabefeld_schreiben(self.__eingabe_p1_y, p.hole_y())
         gui.eingabefeld_schreiben(self.__eingabe_p1_x, p.hole_x())
@@ -134,21 +126,17 @@ class Anwendung(tk.Frame):
         gui.eingabefeld_schreiben(self.__eingabe_p2_x, p.hole_x())
 
     def testdaten_laden(self):
-        """Lädt zufällige Testdaten für die Berechnung und führt die Berechnung durch.
+        """Lädt Testdaten für die Berechnung und führt die Berechnung durch.
 
         :return: None
         :rtype: None
         """
-        testdaten = [
-            [528.15, 407.65, 795.17, 525.10],
-            [16.10, 23.06, 12.32, 6.37]
-        ]
+        testdaten = [528.15, 407.65, 795.17, 525.10]
 
-        i = random.randint(0, len(testdaten) - 1)
-        gui.eingabefeld_schreiben(self.__eingabe_p1_y, testdaten[i][0])
-        gui.eingabefeld_schreiben(self.__eingabe_p1_x, testdaten[i][1])
-        gui.eingabefeld_schreiben(self.__eingabe_p2_y, testdaten[i][2])
-        gui.eingabefeld_schreiben(self.__eingabe_p2_x, testdaten[i][3])
+        gui.eingabefeld_schreiben(self.__eingabe_p1_y, testdaten[0])
+        gui.eingabefeld_schreiben(self.__eingabe_p1_x, testdaten[1])
+        gui.eingabefeld_schreiben(self.__eingabe_p2_y, testdaten[2])
+        gui.eingabefeld_schreiben(self.__eingabe_p2_x, testdaten[3])
 
         self.berechnen()
 
@@ -158,8 +146,10 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        p1: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p1_y), gui.eingabefeld_auswerten(self.__eingabe_p1_x))
-        p2: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p2_y), gui.eingabefeld_auswerten(self.__eingabe_p2_x))
+        p1: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p1_y),
+                                  gui.eingabefeld_auswerten(self.__eingabe_p1_x))
+        p2: pkt.Punkt = pkt.Punkt(gui.eingabefeld_auswerten(self.__eingabe_p2_y),
+                                  gui.eingabefeld_auswerten(self.__eingabe_p2_x))
 
         strecke, richtungswinkel = grundlagen.zweite_grundaufgabe.zweite_grundaufgabe(p1, p2)
 

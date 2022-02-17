@@ -1,5 +1,4 @@
 import tkinter as tk
-from typing import Union
 
 
 def eingabefeld_auswerten(p_eingabefeld: tk.Entry) -> float:
@@ -15,7 +14,7 @@ def eingabefeld_auswerten(p_eingabefeld: tk.Entry) -> float:
     return wert2fliess(sz_wert)
 
 
-def eingabefeld_schreiben(p_eingabefeld: tk.Entry, p_wert: Union[float, str]) -> None:
+def eingabefeld_schreiben(p_eingabefeld: tk.Entry, p_wert: float) -> None:
     """Schreibt einen Wert in ein Eingabefeld.
 
     :param p_eingabefeld: Eingabefeld
@@ -40,7 +39,6 @@ def wert2fliess(p_wert: str) -> float:
     try:
         wert: float = float(p_wert)
     except:
-        # todo
         wert: float = 0.0
 
     return wert

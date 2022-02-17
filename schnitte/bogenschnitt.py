@@ -23,7 +23,6 @@ class Bogenschnitt:
         :return: Beide Neupunkte und den Maßstab
         :rtype: tuple
         """
-
         # Koordinaten der Punkte
         p1_y: float = p_p1.hole_y()
         p1_x: float = p_p1.hole_x()
@@ -36,7 +35,7 @@ class Bogenschnitt:
         pn2_y: float = 0
         pn2_x: float = 0
 
-        # Maßstab berechnen und Strecken reduzieren
+        # Massstab berechnen und Strecken reduzieren
         s3_b: float = (((p1_y - p2_y) ** 2) + ((p1_x - p2_x) ** 2)) ** 0.5
         massstab: float = 1.0
 

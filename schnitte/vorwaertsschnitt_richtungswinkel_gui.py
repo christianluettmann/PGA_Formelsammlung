@@ -48,9 +48,8 @@ class Anwendung(tk.Frame):
 
         # Eingabe
         tk.Label(self, text="Eingabe:", font=("arial", 14, "underline")).grid(row=zeile)
-        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(row=zeile,
-                                                                                               column=spalten_max,
-                                                                                               sticky="e")
+        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(
+            row=zeile, column=spalten_max, sticky="e")
         zeile += 1
 
         """
@@ -63,8 +62,8 @@ class Anwendung(tk.Frame):
             self.__eingabe_p3_nr.grid(row=pos[0], column=pos[1] + 1, sticky="ew")
             tk.Button(self,
                       text="Punkt 3 laden",
-                      command=lambda: self.lade_punkt_3(self.__eingabe_p3_nr.get())) \
-                .grid(row=pos[0], column=pos[1] + 2, sticky="w")
+                      command=lambda: self.lade_punkt_3(self.__eingabe_p3_nr.get())).grid(
+                row=pos[0], column=pos[1] + 2, sticky="w")
         # Koordinaten eingeben
         tk.Label(self, text="y 3:").grid(row=pos[0] + 1, column=pos[1])
         self.__eingabe_p3_y.grid(row=pos[0] + 1, column=pos[1] + 1, sticky="ew")
@@ -84,8 +83,8 @@ class Anwendung(tk.Frame):
             self.__eingabe_p1_nr.grid(row=pos[0], column=pos[1] + 1, sticky="ew")
             tk.Button(self,
                       text="Punkt 1 laden",
-                      command=lambda: self.lade_punkt_1(self.__eingabe_p1_nr.get())) \
-                .grid(row=pos[0], column=pos[1] + 2, sticky="w")
+                      command=lambda: self.lade_punkt_1(self.__eingabe_p1_nr.get())).grid(
+                row=pos[0], column=pos[1] + 2, sticky="w")
         # Koordinaten eingeben
         tk.Label(self, text="y 1:").grid(row=pos[0] + 1, column=pos[1])
         self.__eingabe_p1_y.grid(row=pos[0] + 1, column=pos[1] + 1, sticky="ew")
@@ -113,8 +112,8 @@ class Anwendung(tk.Frame):
             self.__eingabe_p4_nr.grid(row=pos[0], column=pos[1] + 1, sticky="ew")
             tk.Button(self,
                       text="Punkt 4 laden",
-                      command=lambda: self.lade_punkt_4(self.__eingabe_p4_nr.get())) \
-                .grid(row=pos[0], column=pos[1] + 2, sticky="w")
+                      command=lambda: self.lade_punkt_4(self.__eingabe_p4_nr.get())).grid(
+                row=pos[0], column=pos[1] + 2, sticky="w")
         # Koordinaten eingeben
         tk.Label(self, text="y 4:").grid(row=pos[0] + 1, column=pos[1])
         self.__eingabe_p4_y.grid(row=pos[0] + 1, column=pos[1] + 1, sticky="ew")
@@ -134,8 +133,8 @@ class Anwendung(tk.Frame):
             self.__eingabe_p2_nr.grid(row=pos[0], column=pos[1] + 1, sticky="ew")
             tk.Button(self,
                       text="Punkt 2 laden",
-                      command=lambda: self.lade_punkt_2(self.__eingabe_p2_nr.get())) \
-                .grid(row=pos[0], column=pos[1] + 2, sticky="w")
+                      command=lambda: self.lade_punkt_2(self.__eingabe_p2_nr.get())).grid(
+                row=pos[0], column=pos[1] + 2, sticky="w")
         # Koordinaten eingeben
         tk.Label(self, text="y 2:").grid(row=pos[0] + 1, column=pos[1])
         self.__eingabe_p2_y.grid(row=pos[0] + 1, column=pos[1] + 1, sticky="ew")
@@ -155,7 +154,8 @@ class Anwendung(tk.Frame):
 
         # Berechnen Button
         zeile = 12
-        tk.Button(self, text="Berechnen", command=self.berechnen, fg="blue").grid(row=zeile, column=2,columnspan=2,  sticky="ew")
+        tk.Button(self, text="Berechnen", command=self.berechnen, fg="blue").grid(
+            row=zeile, column=2, columnspan=2,  sticky="ew")
         zeile += 1
         # Ausgabe
         tk.Label(self, text="Ausgabe:", font=("arial", 14, "underline")).grid(row=zeile)
@@ -183,14 +183,14 @@ class Anwendung(tk.Frame):
         tk.Label(self, text="").grid(row=pos[0] + 3, column=pos[1], columnspan=3)
 
         # JSON Import/Export
-        tk.Button(self, text="JSON laden", fg="purple", command=self.json_laden).grid(row=20, column=0, columnspan=2, sticky="ew")
-        tk.Button(self, text="JSON speichern", fg="purple", command=self.json_speichern).grid(row=20,
-                                                                                              column=spalten_max - 1,
-                                                                                              columnspan=2,
-                                                                                              sticky="ew")
+        tk.Button(self, text="JSON laden", fg="purple", command=self.json_laden).grid(
+            row=20, column=0, columnspan=2, sticky="ew")
+        tk.Button(self, text="JSON speichern", fg="purple", command=self.json_speichern).grid(
+            row=20, column=spalten_max - 1, columnspan=2, sticky="ew")
 
         # Beenden Button
-        tk.Button(self, text="Beenden", fg="red", command=self.master.destroy).grid(row=20, column=2, columnspan=2,sticky="ew")
+        tk.Button(self, text="Beenden", fg="red", command=self.master.destroy).grid(
+            row=20, column=2, columnspan=2, sticky="ew")
 
     def berechnen(self):
         """Übergibt die Eingabewerte an die Berechnungsmethode und schreibt die berechneten Werte in die Ausgabefelder.
@@ -208,7 +208,8 @@ class Anwendung(tk.Frame):
         r_2n = gui.eingabefeld_auswerten(self.__eingabe_richtung_2n)
         r_24 = gui.eingabefeld_auswerten(self.__eingabe_richtung_24)
 
-        neupunkt = schnitte.vorwaertsschnitt.Vorwaertsschnitt.berechnen_richtungswinkel(p1, p2, p3, p4, r_1n, r_13, r_2n, r_24)
+        neupunkt = schnitte.vorwaertsschnitt.Vorwaertsschnitt.berechnen_richtungswinkel(p1, p2, p3, p4,
+                                                                                        r_1n, r_13, r_2n, r_24)
 
         gui.eingabefeld_schreiben(self.__ausgabe_pn_y, neupunkt.hole_y())
         gui.eingabefeld_schreiben(self.__ausgabe_pn_x, neupunkt.hole_x())
@@ -219,7 +220,12 @@ class Anwendung(tk.Frame):
         :return: None
         :rtype: None
         """
-        testdaten = [24681.92, 90831.87, 24877.72, 89251.09, 23231.58, 91422.92, 22526.65, 89150.52, 331.6174, 0, 60.7510, 0]
+        testdaten = [24681.92, 90831.87,    # P1
+                     24877.72, 89251.09,    # P2
+                     23231.58, 91422.92,    # P4
+                     22526.65, 89150.52,    # P3
+                     331.6174, 0,           # phi
+                     60.7510, 0]            # psi
         # Soll: y = 24052.79, Quelle: PGA Vorlesung
 
         gui.eingabefeld_schreiben(self.__eingabe_p1_y, testdaten[0])
@@ -300,7 +306,7 @@ class Anwendung(tk.Frame):
             gui.eingabefeld_auswerten(self.__ausgabe_pn_y),
             gui.eingabefeld_auswerten(self.__ausgabe_pn_x),
             self.__ausgabe_pn_nr.get(),
-            0)   # TODO
+            0)
         self.master.sende_punkt(p)
 
     def json_laden(self) -> None:

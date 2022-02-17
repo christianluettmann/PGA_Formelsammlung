@@ -1,5 +1,5 @@
 from math import tan, atan
-from grundlagen.winkel import rhogon
+from grundlagen.winkel import Winkel
 import grundlagen.punkt as pkt
 
 
@@ -39,12 +39,12 @@ class Rueckwaertsschnitt:
         beta: float = p_r_nb - p_r_nm
 
         # Hilfpunkt C
-        pc_y: float = pa_y + (pm_x-pa_x) / tan(alpha/rhogon)
-        pc_x: float = pa_x - (pm_y-pa_y) / tan(alpha/rhogon)
+        pc_y: float = pa_y + (pm_x-pa_x) / tan(Winkel.gon2rad(alpha))
+        pc_x: float = pa_x - (pm_y-pa_y) / tan(Winkel.gon2rad(alpha))
 
         # Hilfpunkt D
-        pd_y: float = pb_y + (pb_x-pm_x) / tan(beta/rhogon)
-        pd_x: float = pb_x - (pb_y-pm_y) / tan(beta/rhogon)
+        pd_y: float = pb_y + (pb_x-pm_x) / tan(Winkel.gon2rad(beta))
+        pd_x: float = pb_x - (pb_y-pm_y) / tan(Winkel.gon2rad(beta))
 
         # Richtungswinkel von C nach D
         t_cd: float = atan((pd_y-pc_y)/(pd_x-pc_x))

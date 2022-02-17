@@ -11,8 +11,8 @@ class Statusleiste(tk.Frame):
         """
         super().__init__(p_master)
 
-        self.__inhalt = tk.StringVar()
-        self.__beschriftung = tk.Label(self)
+        self.__inhalt: tk.StringVar = tk.StringVar()
+        self.__beschriftung: tk.Label = tk.Label(self)
 
         self.grid()
 

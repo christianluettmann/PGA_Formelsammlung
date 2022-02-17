@@ -55,12 +55,16 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_datei.add_command(label="öffnen...", command=self.master.menue_datei_importieren)
+        self.__menue_datei.add_command(label="öffnen...",
+                                       command=self.master.menue_datei_importieren)
         self.__menue_datei.add_separator()
-        self.__menue_datei.add_command(label="Importieren...", command=self.master.menue_datei_importieren)
-        self.__menue_datei.add_command(label="Exportieren...", command=self.master.menue_exportieren)
+        self.__menue_datei.add_command(label="Importieren...",
+                                       command=self.master.menue_datei_importieren)
+        self.__menue_datei.add_command(label="Exportieren...",
+                                       command=self.master.menue_exportieren)
         self.__menue_datei.add_separator()
-        self.__menue_datei.add_command(label="Beenden", command=self.master.menue_beenden)
+        self.__menue_datei.add_command(label="Beenden",
+                                       command=self.master.menue_beenden)
 
     def menue_berechnungen(self) -> None:
         """Initialisiert das Berechnungen-Menü mit den verschiedenen Untermenüs.
@@ -72,7 +76,7 @@ class Menue(tk.Menu):
         self.menue_berechnungen_grundlagen()
         self.menue_berechnungen_schnitte()
         self.menue_berechnungen_polygonzug()
-        # Untermenüs einhängen
+        # Untermenüs einhaengen
         self.__menue_berechnungen.add_cascade(label="Grundlagen", menu=self.__menue_berechnungen_grundlagen)
         self.__menue_berechnungen.add_cascade(label="Schnitte", menu=self.__menue_berechnungen_schnitte)
         self.__menue_berechnungen.add_cascade(label="Polygonzug", menu=self.__menue_berechnungen_polygonzug)
@@ -83,10 +87,13 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_berechnungen_grundlagen.add_command(label="Winkelumrechnung", command=self.master.fenster_winkel)
+        self.__menue_berechnungen_grundlagen.add_command(label="Winkelumrechnung",
+                                                         command=self.master.fenster_winkel)
         self.__menue_berechnungen_grundlagen.add_separator()
-        self.__menue_berechnungen_grundlagen.add_command(label="1. geo. Grundaufgabe", command=self.master.fenster_erste_grundaufgabe)
-        self.__menue_berechnungen_grundlagen.add_command(label="2. geo. Grundaufgabe", command=self.master.fenster_zweite_grundaufgabe)
+        self.__menue_berechnungen_grundlagen.add_command(label="1. geo. Grundaufgabe",
+                                                         command=self.master.fenster_erste_grundaufgabe)
+        self.__menue_berechnungen_grundlagen.add_command(label="2. geo. Grundaufgabe",
+                                                         command=self.master.fenster_zweite_grundaufgabe)
 
     def menue_berechnungen_schnitte(self) -> None:
         """Initialisiert das Schnitte-Untermenü.
@@ -94,10 +101,14 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt-Dreieckswinkel", command=self.master.fenster_vorwaertsschnitt_dreieckswinkel)
-        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt-Richtungswinkel", command=self.master.fenster_vorwaertsschnitt_richtungswinkel)
-        self.__menue_berechnungen_schnitte.add_command(label="Rückwärtsschnitt", command=self.master.fenster_rueckwaertsschnitt)
-        self.__menue_berechnungen_schnitte.add_command(label="Bogenschnitt", command=self.master.fenster_bogenschnitt)
+        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt-Dreieckswinkel",
+                                                       command=self.master.fenster_vorwaertsschnitt_dreieckswinkel)
+        self.__menue_berechnungen_schnitte.add_command(label="Vorwärtsschnitt-Richtungswinkel",
+                                                       command=self.master.fenster_vorwaertsschnitt_richtungswinkel)
+        self.__menue_berechnungen_schnitte.add_command(label="Rückwärtsschnitt",
+                                                       command=self.master.fenster_rueckwaertsschnitt)
+        self.__menue_berechnungen_schnitte.add_command(label="Bogenschnitt",
+                                                       command=self.master.fenster_bogenschnitt)
 
     def menue_berechnungen_polygonzug(self) -> None:
         """Initialisiert das Polygonzug-Untermenü.
@@ -105,8 +116,10 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_berechnungen_polygonzug.add_command(label="beidseitig angeschlossen", command=self.master.fenster_polygonzug_beidseitig)
-        self.__menue_berechnungen_polygonzug.add_command(label="Ring", command=self.master.fenster_polygonzug_ring)
+        self.__menue_berechnungen_polygonzug.add_command(label="beidseitig angeschlossen",
+                                                         command=self.master.fenster_polygonzug_beidseitig)
+        self.__menue_berechnungen_polygonzug.add_command(label="Ring",
+                                                         command=self.master.fenster_polygonzug_ring)
 
     def menue_transformationen(self) -> None:
         """Initialisiert das Transformationen-Menü.
@@ -114,8 +127,10 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_transformationen.add_command(label="Helmerttransformation", command=self.master.menue_tut_nix)
-        self.__menue_transformationen.add_command(label="Affintransformation", command=self.master.menue_tut_nix)
+        self.__menue_transformationen.add_command(label="Helmerttransformation",
+                                                  command=self.master.menue_tut_nix)
+        self.__menue_transformationen.add_command(label="Affintransformation",
+                                                  command=self.master.menue_tut_nix)
 
     def menue_hilfe(self) -> None:
         """Initialisiert das Hilfe-Menü.
@@ -133,6 +148,9 @@ class Menue(tk.Menu):
         :rtype: None
         """
         copyright_zeichen = u"\u00A9"
-        zeilen = ["copyright %s" % copyright_zeichen, "Lara Dick", "Lukas Looschen", "Christian Lüttmann", "Antonia Beekmann", ]
+        zeilen = [f"Copyright: {copyright_zeichen} 2022",
+                  "",
+                  "Dieses Programm wurde erstellt von:",
+                  "    Lara Dick", "    Lukas Looschen", "    Christian Lüttmann", "    Antonia Beekmann"]
         nachricht = "\n". join(zeilen)
         tkmb.showinfo("Über", nachricht)

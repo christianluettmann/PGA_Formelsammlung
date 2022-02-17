@@ -1,5 +1,5 @@
 from math import atan
-from grundlagen.winkel import rhogon
+from grundlagen.winkel import Winkel
 import grundlagen.punkt as pkt
 
 
@@ -36,7 +36,7 @@ def zweite_grundaufgabe(p_p1: pkt.Punkt, p_p2: pkt.Punkt) -> tuple:
         elif delta_y > 0:       # Punkt liegt in Richtung Osten
             t12 = 100
     else:
-        t12: float = atan(delta_y/delta_x)*rhogon
+        t12: float = Winkel.rad2gon(atan(delta_y/delta_x))
         if delta_x < 0:         # Punkt liegt im 2. oder 3. Quadranten
             t12 += 200
         else:

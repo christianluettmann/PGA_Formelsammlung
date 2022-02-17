@@ -1,5 +1,3 @@
-import json
-
 import grundlagen.punkt as pkt
 
 

@@ -1,4 +1,5 @@
 import tkinter as tk
+
 import grundlagen.punkt as pkt
 import gui.tabelle
 
@@ -6,12 +7,11 @@ import gui.tabelle
 class Arbeitsbereich(tk.Frame):
 
     def __init__(self, p_master=None):
-        """
-        Initialisiert den Arbeitsbereich.
+        """Initialisiert den Arbeitsbereich.
+
         :param p_master: Master-Anwendung
         :type p_master: Anwendung
         """
-
         super().__init__(p_master)
 
         self.__textfeld: tk.Text = tk.Text(self, height=200, width=100)

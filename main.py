@@ -15,15 +15,15 @@ import schnitte.vorwaertsschnitt_dreieckswinkel_gui
 import schnitte.vorwaertsschnitt_richtungswinkel_gui
 import schnitte.bogenschnitt_gui
 
+import polygonzug_package.polygonzug_beidseitig_gui
+import polygonzug_package.polygonzug_ring_gui
+
 import gui.menue
 import gui.werkzeugleiste
 import gui.statusleiste
 import gui.arbeitsbereich
 import gui.berechnungsfenster
 import gui.tabelle
-
-import polygonzug_package.polygonzug_beidseitig_gui
-import polygonzug_package.polygonzug_ring_gui
 
 
 class Anwendung(tk.Tk):
@@ -37,10 +37,10 @@ class Anwendung(tk.Tk):
         self.grid()
 
         # GUI
-        self.__menue = gui.menue.Menue(self)
-        self.__werkzeugleiste = gui.werkzeugleiste.Werkzeugleiste(self)
-        self.__statusleiste = gui.statusleiste.Statusleiste(self)
-        self.__arbeitsbereich = gui.arbeitsbereich.Arbeitsbereich(self)
+        self.__menue: gui.menue.Menue = gui.menue.Menue(self)
+        self.__werkzeugleiste: gui.werkzeugleiste.Werkzeugleiste = gui.werkzeugleiste.Werkzeugleiste(self)
+        self.__statusleiste: gui.statusleiste.Statusleiste = gui.statusleiste.Statusleiste(self)
+        self.__arbeitsbereich: gui.arbeitsbereich.Arbeitsbereich = gui.arbeitsbereich.Arbeitsbereich(self)
 
         # DATEN
         self.__pktlst: dict = {}
@@ -73,47 +73,47 @@ class Anwendung(tk.Tk):
 
     @staticmethod
     def fenster_winkel():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         grundlagen.winkel_gui.Anwendung(top)
 
     @staticmethod
     def fenster_erste_grundaufgabe():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         grundlagen.erste_grundaufgabe_gui.Anwendung(top)
 
     @staticmethod
     def fenster_zweite_grundaufgabe():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         grundlagen.zweite_grundaufgabe_gui.Anwendung(top)
 
     @staticmethod
     def fenster_bogenschnitt():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         schnitte.bogenschnitt_gui.Anwendung(top)
 
     @staticmethod
     def fenster_rueckwaertsschnitt():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         schnitte.rueckwaertsschnitt_gui.Anwendung(top)
 
     @staticmethod
     def fenster_vorwaertsschnitt_dreieckswinkel():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         schnitte.vorwaertsschnitt_dreieckswinkel_gui.Anwendung(top)
 
     @staticmethod
     def fenster_vorwaertsschnitt_richtungswinkel():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         schnitte.vorwaertsschnitt_richtungswinkel_gui.Anwendung(top)
 
     @staticmethod
     def fenster_polygonzug_beidseitig():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         polygonzug_package.polygonzug_beidseitig_gui.Anwendung(top)
 
     @staticmethod
     def fenster_polygonzug_ring():
-        top = gui.berechnungsfenster.Berechnungsfenster()
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         polygonzug_package.polygonzug_ring_gui.Anwendung(top)
 
     @staticmethod
@@ -126,11 +126,10 @@ class Anwendung(tk.Tk):
         :return: None
         :rtype: None
         """
-        # TODO: Was passiert, wenn die JSON-Datei keine Punktliste ist?
         # Datei festlegen
         dateiname = tkfd.askopenfilename(
             title="Datei öffnen",
-            initialdir="/Desktop",
+            initialdir="./Daten_Import",
             filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*'))
             )
         # JSON-Daten aus Datei lesen
@@ -149,16 +148,21 @@ class Anwendung(tk.Tk):
         dateiname = tkfd.asksaveasfile(
             mode="w",
             title="Datei exportieren",
-            initialdir="/Desktop",
+            initialdir="./Daten_Export",
             defaultextension=".json",
             filetypes=(('JSON-Dateien', '*.json'), ('Alle Dateien', '*.*')),
-        )
+            )
         # JSON-Datei schreiben
-        inhalt = json.dumps(self.__arbeitsbereich.hole_punktliste(), indent=4)
+        inhalt: str = json.dumps(self.__arbeitsbereich.hole_punktliste(), indent=4)
         dateiname.write(inhalt)
         dateiname.close()
 
-    def menue_beenden(self):
+    def menue_beenden(self) -> None:
+        """Beendet die Anwendung.
+
+        :return: None
+        :rtype: None
+        """
         self.destroy()
 
     def lade_punkt(self, p_pktnr) -> pkt.Punkt:

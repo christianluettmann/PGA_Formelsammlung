@@ -1,4 +1,5 @@
 import tkinter as tk
+
 import grundlagen.gui as gui
 import grundlagen.punkt as pkt
 import grundlagen.punktliste as pktlst
@@ -49,8 +50,6 @@ class Tabelle(tk.Frame):
         zeile += 1
 
         for schluessel, wert in self.__pktlst.items():
-
-            # TODO: kann noch optimiert werden
             # Eintrag im Dict zur Aufnahme einer Tabellenzeile von Eingabefeldern
             self.__eingabe_pktlst[schluessel]: dict = dict()
             spalte: int = 0
@@ -63,7 +62,8 @@ class Tabelle(tk.Frame):
             self.erzeuge_eingabefeld(zeile, spalte, schluessel, "epsg", wert.hole_epsg())
             zeile += 1
 
-    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int, p_schluessel: str, p_atributname: str, p_atributwert: str) -> None:
+    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int,
+                            p_schluessel: str, p_atributname: str, p_atributwert: str) -> None:
         """Erzeugt ein Eingabefeld an der angegebenen Stellt mit den Werten.
 
         :param p_zeile: Zeilennummer
@@ -92,7 +92,6 @@ class Tabelle(tk.Frame):
         """
         # Inhalt der Punktliste komplett löschen
         self.__pktlst.clear()
-        # TODO: Soll wirklich die gesamte Tabelle wieder durchlaufen werden?
         for schluessel, wert in self.__eingabe_pktlst.items():
 
             nr: str = self.__eingabe_pktlst[schluessel]["nr"].get()

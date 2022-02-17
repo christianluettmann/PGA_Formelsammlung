@@ -1,5 +1,5 @@
 from math import sin, cos, sqrt
-from grundlagen.winkel import rhogon
+from grundlagen.winkel import Winkel
 import grundlagen.punkt as pkt
 import grundlagen.zweite_grundaufgabe
 
@@ -29,7 +29,8 @@ class Polygonzug:
 
     @staticmethod
     def koordinatenunterschiede(messungen: list[dict]) -> list[dict]:
-        """Berechnet die Koordinatenunterschiede zwischen den einzelnen Punkten und fügt diese in die Liste der Messungen ein.
+        """Berechnet die Koordinatenunterschiede zwischen den einzelnen Punkten
+        und fügt diese in die Liste der Messungen ein.
 
         :param messungen: Liste mit Dictionaries der einzelnen Messungen
         :type messungen: list[dict]
@@ -37,13 +38,14 @@ class Polygonzug:
         :rtype: list[dict]
         """
         for messung in messungen:
-            messung["delta_y"]: float = messung["Strecke"] * sin(messung["verb_riwi"] / rhogon)
-            messung["delta_x"]: float = messung["Strecke"] * cos(messung["verb_riwi"] / rhogon)
+            messung["delta_y"]: float = messung["Strecke"] * sin(Winkel.gon2rad(messung["verb_riwi"]))
+            messung["delta_x"]: float = messung["Strecke"] * cos(Winkel.gon2rad(messung["verb_riwi"]))
         return messungen
 
     @staticmethod
     def koordinatenverbesserungen(messungen: list[dict], abweichungen: dict) -> list[dict]:
-        """Berechnet die Koordinatenverbesserungen zwischen den einzelnen Punkten und fügt diese in die Liste der Messungen ein.
+        """Berechnet die Koordinatenverbesserungen zwischen den einzelnen Punkten
+        und fügt diese in die Liste der Messungen ein.
 
         :param messungen: Liste mit Dictionaries der einzelnen Messungen
         :type messungen: list[dict]
@@ -86,7 +88,8 @@ class Polygonzug:
 
 
 class PolygonzugBeidseitig(Polygonzug):
-    def berechnen(self, p_p0: pkt.Punkt, p_p1: pkt.Punkt, p_pn: pkt.Punkt, p_pn1: pkt.Punkt, messungen: list) -> tuple[list[dict], dict]:
+    def berechnen(self, p_p0: pkt.Punkt, p_p1: pkt.Punkt, p_pn: pkt.Punkt, p_pn1: pkt.Punkt,
+                  messungen: list) -> tuple[list[dict], dict]:
         """Berechnet den Polygonzug mit beidseitigem Richtungs- und Koordinatenanschluss.
         (Gruber, Joeckel: Formelsammlung für das Vermessungswesen, 18. Auflage, S. 91)
 
@@ -112,7 +115,8 @@ class PolygonzugBeidseitig(Polygonzug):
 
         # 2. Winkelabweichung
         sum_beta: float = sum(i["Beta"] for i in messungen)
-        abweichungen["Abw_winkel"]: float = richtung_abschluss - (richtung_anschluss + sum_beta - (len(messungen) - 2) * 200)  # TODO: Überprüfen len-2
+        abweichungen["Abw_winkel"]: float = richtung_abschluss - (
+                richtung_anschluss + sum_beta - (len(messungen) - 2) * 200)  # TODO: Überprüfen len-2
         abweichungen["Delta_abw_winkel"]: float = abweichungen["Abw_winkel"] / len(messungen)
 
         # 3. Richtungswinkel
@@ -136,10 +140,12 @@ class PolygonzugBeidseitig(Polygonzug):
         sum_delta_x: float = sum(i["delta_x"] for i in messungen)
         # Lineare Abweichung
         abweichungen["Abw_linear"]: float = sqrt(abweichungen["Abw_y"] ** 2 + abweichungen["Abw_x"] ** 2)
-        # Längsabweichung
-        abweichungen["Abw_laengs"]: float = (abweichungen["Abw_y"] * sum_delta_y + abweichungen["Abw_x"] * sum_delta_x) / (sqrt(sum_delta_y ** 2 + sum_delta_x ** 2))
+        # Laengsabweichung
+        abweichungen["Abw_laengs"]: float = (abweichungen["Abw_y"]*sum_delta_y + abweichungen["Abw_x"] * sum_delta_x) \
+                                            / (sqrt(sum_delta_y ** 2 + sum_delta_x ** 2))
         # Querabweichung
-        abweichungen["Abw_quer"]: float = (abweichungen["Abw_y"] * sum_delta_x - abweichungen["Abw_x"] * sum_delta_y) / (sqrt(sum_delta_y ** 2 + sum_delta_x ** 2))
+        abweichungen["Abw_quer"]: float = (abweichungen["Abw_y"] * sum_delta_x - abweichungen["Abw_x"] * sum_delta_y) \
+                                          / (sqrt(sum_delta_y ** 2 + sum_delta_x ** 2))
 
         return messungen, abweichungen
 

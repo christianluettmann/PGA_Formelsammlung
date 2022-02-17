@@ -1,5 +1,5 @@
 import grundlagen.punkt as pkt
-import math
+from math import sqrt
 import copy
 import sys
 
@@ -15,8 +15,7 @@ class Strecke:
         :param p_nr: optionale Streckennummer
         :type p_nr: str
         """
-        if p_pa.hole_epsg() != p_pe.hole_epsg():
-            # TODO: Fehler? Transformation?
+        if p_pa.hole_epsg() != p_pe.hole_epsg():    # Fehler! Transformation?
             sys.exit(1)
         else:
             self.__epsg = p_pa.hole_epsg()
@@ -45,7 +44,7 @@ class Strecke:
         """
         pa: pkt.Punkt = pkt.Punkt(p_y1, p_x1)
         pe: pkt.Punkt = pkt.Punkt(p_y2, p_x2)
-        # Objekt der Klasse Strecke mit Hilfe des primären Konstruktors anlegen und zurückgeben
+        # Objekt der Klasse Strecke mit Hilfe des primaeren Konstruktors anlegen und zurückgeben
         return cls(pa, pe, p_nr)
 
     @classmethod
@@ -107,8 +106,7 @@ class Strecke:
         :return: None
         :rtype: None
         """
-        if p_pa.hole_epsg() != self.__pa.hole_epsg():
-            # TODO: Fehler? Transformation?
+        if p_pa.hole_epsg() != self.__pa.hole_epsg():   # Fehler! Transformation?
             sys.exit(1)
 
         self.__pa: pkt.Punkt = copy.deepcopy(p_pa)
@@ -121,8 +119,7 @@ class Strecke:
         :return: None
         :rtype: None
         """
-        if p_pe.hole_epsg() != self.__pe.hole_epsg():
-            # TODO: Fehler? Transformation?
+        if p_pe.hole_epsg() != self.__pe.hole_epsg():   # Fehler! Transformation?
             sys.exit(1)
 
         self.__pe: pkt.Punkt = copy.deepcopy(p_pe)
@@ -136,7 +133,7 @@ class Strecke:
         dy: float = self.__pe.hole_y() - self.__pa.hole_y()
         dx: float = self.__pe.hole_x() - self.__pa.hole_x()
 
-        laenge: float = math.sqrt(math. pow(dy, 2) + math.pow(dx, 2))
+        laenge: float = sqrt(dy**2 + dx**2)
 
         return laenge
 
@@ -146,7 +143,8 @@ class Strecke:
         :return: Beschreibung der Strecke
         :rtype: str
         """
-        sz: str = "Nr:" + self.__nr + " | PA: " + str(self.__pa) + " | PE: " + str(self.__pe) + " | s: " + str(self.laenge())
+        sz: str = f"Nr:{self.__nr} | PA: {self.__pa} | PE: {self.__pe} | s: {self.laenge()}"
+
         return sz
 
     def hole_json(self) -> dict:

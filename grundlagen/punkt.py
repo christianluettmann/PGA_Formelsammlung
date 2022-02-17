@@ -1,9 +1,6 @@
 class Punkt:
     """Klasse Punkt
 
-    TODO: Brauchen wir für den EPSG-Code auch einen Setter?
-    Oder ist bei der Änderung zwangweise eine Transformation notwendig?
-
     """
     def __init__(self, p_y: float = 0.0, p_x: float = 0.0, p_nr: str = "", p_epsg: int = 0):
         """Initialisiert die Klasse Punkt.
@@ -90,8 +87,8 @@ class Punkt:
         :return: Beschreibung des Punktes
         :rtype: str
         """
-        zeichenkette: str = 'nr:' + self.__nr + ' y=' + str(self.__y) + ' x=' + str(self.__x) + ' EPSG:' + str(
-            self.__epsg)
+        zeichenkette: str = f"nr: {self.__nr} | y: {self.__y} | x: {self.__x} | EPSG: {self.__epsg}"
+
         return zeichenkette
 
     def hole_json(self) -> dict:

@@ -1,5 +1,5 @@
 from math import sin, cos
-from grundlagen.winkel import rhogon
+from grundlagen.winkel import Winkel
 from grundlagen.zweite_grundaufgabe import zweite_grundaufgabe
 import grundlagen.punkt as pkt
 
@@ -37,11 +37,11 @@ class Vorwaertsschnitt:
         t_1n: float = t_12 + alpha
 
         # Strecken im Dreieck
-        s_1n: float = s_12 / (sin((alpha+beta)/rhogon)) * sin(beta/rhogon)
+        s_1n: float = s_12 / (sin(Winkel.gon2rad(alpha+beta) * sin(Winkel.gon2rad(beta))))
 
         # Koordinaten des Neupunkts
-        pn_y: float = p_p1.hole_y() + s_1n * sin(t_1n/rhogon)
-        pn_x: float = p_p1.hole_x() + s_1n * cos(t_1n/rhogon)
+        pn_y: float = p_p1.hole_y() + s_1n * sin(Winkel.gon2rad(t_1n))
+        pn_x: float = p_p1.hole_x() + s_1n * cos(Winkel.gon2rad(t_1n))
 
         return pkt.Punkt(pn_y, pn_x)
 

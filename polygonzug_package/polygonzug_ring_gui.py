@@ -1,10 +1,7 @@
 import tkinter as tk
-import tkinter.filedialog as tkfd
-import json
 
 import grundlagen.gui as gui
 import gui.berechnungsfenster as berechnungsfenster
-import grundlagen.punktliste as pktlst
 import polygonzug_package.polygonzug as pz
 
 
@@ -35,8 +32,10 @@ class Anwendung(tk.Frame):
 
         zeile: int = 0
         # Buttons
-        tk.Button(self, text="Polygonzug laden", command=self.importieren, fg="purple").grid(row=zeile, column=0, columnspan=2, sticky="ew")
-        tk.Button(self, text="Neupunkte exportieren", command=self.exportieren, fg="purple").grid(row=zeile, column=9, columnspan=2, sticky="ew")
+        tk.Button(self, text="Polygonzug laden", command=self.importieren, fg="purple").grid(
+            row=zeile, column=0, columnspan=2, sticky="ew")
+        tk.Button(self, text="Neupunkte exportieren", command=self.exportieren, fg="purple").grid(
+            row=zeile, column=9, columnspan=2, sticky="ew")
         zeile += 1
 
         # Überschriften
@@ -77,7 +76,7 @@ class Anwendung(tk.Frame):
         zeile: int = 3
 
         for i, messung in enumerate(self.__messung):
-            # Einträge je Tabellenzeile ausgeben
+            # Eintraege je Tabellenzeile ausgeben
             self.__eingabe_pktlst[i]: dict = dict()
             spalte: int = 0
             self.erzeuge_eingabefeld(zeile, spalte, i, "Punktnummer", messung["Punktnummer"])
@@ -113,7 +112,8 @@ class Anwendung(tk.Frame):
         tk.Label(self, text=f"{round(self.__abweichungen['Abw_y'], 4)} m").grid(row=zeile, column=5)
         tk.Label(self, text=f"{round(self.__abweichungen['Abw_x'], 4)} m").grid(row=zeile, column=6)
 
-    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int, p_schluessel: int, p_atributname: str, p_atributwert: str) -> None:
+    def erzeuge_eingabefeld(self, p_zeile: int, p_spalte: int,
+                            p_schluessel: int, p_atributname: str, p_atributwert: str) -> None:
         """Erzeugt ein Eingabefeld an der angegebenen Stellt mit den Werten.
 
         :param p_zeile: Zeilennummer
@@ -135,7 +135,7 @@ class Anwendung(tk.Frame):
         try:
             gui.eingabefeld_schreiben(self.__eingabe_pktlst[p_schluessel][p_atributname], round(float(p_atributwert), 4))
         except:
-            gui.eingabefeld_schreiben(self.__eingabe_pktlst[p_schluessel][p_atributname], p_atributwert)
+            self.__eingabe_pktlst[p_schluessel][p_atributname].insert(0, p_atributwert)
 
     def importieren(self) -> None:
 
@@ -165,3 +165,9 @@ class Anwendung(tk.Frame):
         punkte: dict = {i["Punktnummer"]: i["Punkt"] for i in self.__messung}
 
         berechnungsfenster.export_json_dialog(punkte)
+
+
+if __name__ == "__main__":
+    wurzel = tk.Tk()
+    anwendung = Anwendung(wurzel)
+    anwendung.mainloop()

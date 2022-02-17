@@ -1,4 +1,5 @@
 import tkinter as tk
+
 import grundlagen.gui as gui
 import grundlagen.punkt as pkt
 import gui.berechnungsfenster as berechnungsfenster
@@ -45,9 +46,8 @@ class Anwendung(tk.Frame):
         tk.Label(self, text="Eingabe:", font=("arial", 14, "underline")).grid(row=zeile)
         tk.Label(self, text="Achtung: Die Punkte müssen im Uhrzeitersinn eingegeben werden (A->M->B)!", fg="red").grid(
             row=zeile, column=1, columnspan=7)
-        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(row=zeile,
-                                                                                               column=spalten_max,
-                                                                                               sticky="e")
+        tk.Button(self, text="Testdaten laden", command=self.testdaten_laden, fg="green").grid(
+            row=zeile, column=spalten_max, sticky="e")
         zeile += 1
 
         """
@@ -257,7 +257,7 @@ class Anwendung(tk.Frame):
             gui.eingabefeld_auswerten(self.__ausgabe_pn_y),
             gui.eingabefeld_auswerten(self.__ausgabe_pn_x),
             self.__ausgabe_pn_nr.get(),
-            0)  # TODO
+            0)
         self.master.sende_punkt(p)
 
     def json_laden(self) -> None:
