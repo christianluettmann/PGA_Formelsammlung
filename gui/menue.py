@@ -44,7 +44,7 @@ class Menue(tk.Menu):
         self.add_cascade(label="Berechnungen", menu=self.__menue_berechnungen)
 
         self.menue_transformationen()
-        self.add_cascade(label="Transformationen", menu=self.__menue_transformationen)
+        self.add_cascade(label="Transformationen", command=self.master.fenster_transformation)
 
         self.menue_hilfe()
         self.add_cascade(label="Hilfe", menu=self.__menue_hilfe)
@@ -55,9 +55,6 @@ class Menue(tk.Menu):
         :return: None
         :rtype: None
         """
-        self.__menue_datei.add_command(label="öffnen...",
-                                       command=self.master.menue_datei_importieren)
-        self.__menue_datei.add_separator()
         self.__menue_datei.add_command(label="Importieren...",
                                        command=self.master.menue_datei_importieren)
         self.__menue_datei.add_command(label="Exportieren...",

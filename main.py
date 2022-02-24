@@ -18,6 +18,8 @@ import schnitte.bogenschnitt_gui
 import polygonzug_package.polygonzug_beidseitig_gui
 import polygonzug_package.polygonzug_ring_gui
 
+import transformationen_package.transformation_gui
+
 import gui.menue
 import gui.werkzeugleiste
 import gui.statusleiste
@@ -115,6 +117,11 @@ class Anwendung(tk.Tk):
     def fenster_polygonzug_ring():
         top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         polygonzug_package.polygonzug_ring_gui.Anwendung(top)
+
+    @staticmethod
+    def fenster_transformation():
+        top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
+        transformationen_package.transformation_gui.Anwendung(top)
 
     @staticmethod
     def menue_tut_nix():

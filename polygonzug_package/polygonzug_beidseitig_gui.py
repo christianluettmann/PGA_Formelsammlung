@@ -74,6 +74,10 @@ class Anwendung(tk.Frame):
 
         tk.Label(self, text="").grid(row=zeile, columnspan=9)
 
+        # Beenden Button
+        tk.Button(self, text="Beenden", fg="red", command=self.master.destroy).grid(row=100, column=4, columnspan=2,
+                                                                                    sticky="ew")
+
     def setze_punktliste(self, p_messungen: list) -> None:
         """Erstellt die Tabelle mit den Punkten und Messungen.
 
