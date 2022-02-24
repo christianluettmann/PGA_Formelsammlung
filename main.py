@@ -123,10 +123,6 @@ class Anwendung(tk.Tk):
         top: gui.berechnungsfenster.Berechnungsfenster = gui.berechnungsfenster.Berechnungsfenster()
         transformationen_package.transformation_gui.Anwendung(top)
 
-    @staticmethod
-    def menue_tut_nix():
-        tkmb.showinfo("TODO", "Hier passiert noch nix!")
-
     def menue_datei_importieren(self) -> None:
         """Öffnet eine JSON-Datei mit einer Punktliste und schreibt diese in die Tabelle.
 

@@ -21,9 +21,9 @@ class Menue(tk.Menu):
         self.__menue_datei: tk.Menu = tk.Menu(self, tearoff=0)
 
         self.__menue_berechnungen: tk.Menu = tk.Menu(self, tearoff=0)
-        self.__menue_berechnungen_grundlagen: tk.Menu = tk.Menu(self)
-        self.__menue_berechnungen_schnitte: tk.Menu = tk.Menu(self)
-        self.__menue_berechnungen_polygonzug: tk.Menu = tk.Menu(self)
+        self.__menue_berechnungen_grundlagen: tk.Menu = tk.Menu(self, tearoff=0)
+        self.__menue_berechnungen_schnitte: tk.Menu = tk.Menu(self, tearoff=0)
+        self.__menue_berechnungen_polygonzug: tk.Menu = tk.Menu(self, tearoff=0)
 
         self.__menue_transformationen: tk.Menu = tk.Menu(self, tearoff=0)
 
@@ -43,7 +43,6 @@ class Menue(tk.Menu):
         self.menue_berechnungen()
         self.add_cascade(label="Berechnungen", menu=self.__menue_berechnungen)
 
-        self.menue_transformationen()
         self.add_cascade(label="Transformationen", command=self.master.fenster_transformation)
 
         self.menue_hilfe()
@@ -117,17 +116,6 @@ class Menue(tk.Menu):
                                                          command=self.master.fenster_polygonzug_beidseitig)
         self.__menue_berechnungen_polygonzug.add_command(label="Ring",
                                                          command=self.master.fenster_polygonzug_ring)
-
-    def menue_transformationen(self) -> None:
-        """Initialisiert das Transformationen-Menü.
-
-        :return: None
-        :rtype: None
-        """
-        self.__menue_transformationen.add_command(label="Helmerttransformation",
-                                                  command=self.master.menue_tut_nix)
-        self.__menue_transformationen.add_command(label="Affintransformation",
-                                                  command=self.master.menue_tut_nix)
 
     def menue_hilfe(self) -> None:
         """Initialisiert das Hilfe-Menü.
